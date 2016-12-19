@@ -20,29 +20,45 @@
 </head>
 <body>
     <div id="app">
-        <h1 v-responsiveness="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
+         <h1 v-responsiveness="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
         <h3 v-responsiveness="['hidden-xl','hidden-md','hidden-lg']">A Vue.js directive for Responsivity</h3>
-        <p v-responsiveness="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals"/></p>
-        <p v-responsiveness="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
-        <p v-responsiveness="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
-        <p v-responsiveness="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
-        <p v-responsiveness="['hidden-all','xl']">Extra large<br /><img src="http://lorempixel.com/1200/360/animals" /></p>
-        <h1 v-responsiveness="'hidden-xs'">Very big Title</h1>
-        <h6 v-responsiveness="['hidden-sm']">Small Title</h6>
+
+        <h1 v-responsiveness="'hidden-xs'">I am hidden on extra small device screens</h1>
+        <h6 v-responsiveness="['hidden-sm']">I am hidden on small device screens</h6>
+        <h6 v-responsiveness="respObj">Visibility controlled by an object</h6>
+
+        <p v-responsiveness ="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals"/></p>
+        <p v-responsiveness ="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
+        <p v-responsiveness ="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
+        <p v-responsiveness ="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
+        <p v-responsiveness ="['hidden-all','xl']">Extra large<br /><img src="http://lorempixel.com/1200/360/animals" /></p>
+
+        <h3>Lets set up own break points</h3>
+        <div>
+            <p v-responsiveness:myMarks="'hidden-desktop'">Visible on smartphone<br /><img src="http://lorempixel.com/360/240/animals" /></p>
+            <p v-responsiveness:myMarks="['hidden-smartphone']">Visible on desktop<br /><img src="http://lorempixel.com/780/360/animals" /></p>
+        </div>
+
     </div>
+    <h3>Bootstrap 3 breaks</h3>
     <div id="app2">
-        <h1 v-responsiveness="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
-        <h3 v-responsiveness="['hidden-xl','hidden-md','hidden-lg']">A Vue.js directive for Responsivity</h3>
-        <p v-responsiveness="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals" /></p>
-        <p v-responsiveness="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
-        <p v-responsiveness="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
-        <p v-responsiveness="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
-        <p v-responsiveness="['hidden-all','xl']">Extra large<br /><img src="http://lorempixel.com/1200/360/animals" /></p>
+        <h1 v-responsiveness:bs3="['hidden-all','lg','md']">A Vue.js directive for Responsivity</h1>
+        <h3 v-responsiveness:bs3="['hidden-xl','hidden-md','hidden-lg']">A Vue.js directive for Responsivity</h3>
+        <p v-responsiveness:bs3="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals" /></p>
+        <p v-responsiveness:bs3="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
+        <p v-responsiveness:bs3="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
+        <p v-responsiveness:bs3="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
     </div>
 
     <script>
         var demoEl=new Vue({
             el: "#app",
+            data: {
+                dataTrue:true,
+                respObj: { "xs": false, "xs-hidden": true },
+                responsiveMarks$$myMarks:   //setting custom Responsive break marks with the name "myMarks"
+                    { smartphone: { show: true, min: -1, max: 767 }, desktop: { show: true, min: 768, max: Infinity } }
+            }
         })
         var demoEl2 = new Vue({
             el: "#app2",

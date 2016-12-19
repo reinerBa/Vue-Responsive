@@ -6,9 +6,30 @@
 
 Vue.directive('responsiveness', {
     bind: function (el, binding, vnode) {
-        if(el.style.display.length)
-            el.dataset.initialDisplay = el.style.display; //save the user defined css-value
+        //Bootstrap 4 Repsonsive Utils default
+        if (!this.__rPermissions) {
+            this.__rPermissions = {};
+            for (i in vnode.context.$data)
+                if (i.startsWith("responsiveMarks$$")) {
+                    var name = new String(i).replace("responsiveMarks$$", "").toLowerCase();
+                    this.__rPermissions[name] = {};
+                    for (ii in vnode.context.$data[i]) this.__rPermissions[name][ii] = vnode.context.$data[i][ii];
+                    debugger;
+                }
+            this.__rPermissions.undefined = { xs: { show: true, min: -1, max: 543 }, sm: { show: true, min: 544, max: 767 }, md: { show: true, min: 768, max: 991 }, lg: { show: true, min: 992, max: 1199 }, xl: { show: true, min: 1200, max: Infinity } };
+            //:bs3
+            this.__rPermissions.bs3 = { xs: { show: true, min: -1, max: 767 }, sm: { show: true, min: 768, max: 991 }, md: { show: true, min: 992, max: 1199 }, lg: { show: true, min: 1200, max: Infinity } };
+        }
+        var validInputs = ['hidden-all'];
+        for (i in this.__rPermissions[binding.arg]) {
+            validInputs.push(i);
+            validInputs.push("hidden-"+i);
+        } 
+//        var validInputs = ["xs", "sm", "md", "lg", "xl", "hidden-xs", "hidden-sm", "hidden-md", "hidden-lg", "hidden-xl", "hidden-all"];
 
+        if (el.style.display.length)
+            el.dataset.initialDisplay = el.style.display; //save the user defined css-value
+        
         var preParams = [];
 
         if (Array.isArray(binding.value) || (typeof binding.expression === "string" && !!binding.expression.match(/\[*\]/))) {
@@ -19,6 +40,10 @@ Vue.directive('responsiveness', {
                 preParams = JSON.parse(stringArray );
             }
             preParams.sort();
+        } else if (typeof binding.value === 'object') {
+            for (i in binding.value) {
+                if (binding.value[i]) preParams.push(i);
+            }
         } else if (typeof binding.value === "string" || typeof binding.expression === "string") {   //a single parameter
             var val = binding.value || binding.expression.replace(/'"/g, "");
             preParams = new Array(val);
@@ -29,21 +54,15 @@ Vue.directive('responsiveness', {
         }
         if (!preParams) return 0;
 
-        //Bootstrap 4 Repsonsive Utils default
-        this.__rPermissions = { xs: { show: true, min: -1, max: 543 }, sm: { show: true, min: 544, max: 767 }, md: { show: true, min: 768, max: 991 }, lg: { show: true, min: 992, max: 1199 }, xl: { show: true, min: 1200, max: Infinity } };
-        //:bs3
-        if (binding.arg === "bs3")
-            this.__rPermissions= { xs: { show: true, min: -1, max: 767 }, sm: { show: true, min: 768, max: 991 }, md: { show: true, min: 992, max: 1199 }, lg: { show: true, min: 1200, max: Infinity } };        
-        
+
         var rPermissions = {};
-        for (k in this.__rPermissions)
+        for (k in this.__rPermissions[binding.arg])
             rPermissions[k] = true;
 
-        var validInputs = ["xs", "sm", "md", "lg", "xl", "hidden-xs", "hidden-sm", "hidden-md", "hidden-lg", "hidden-xl","hidden-all"]
         
         if (preParams[0] === "hidden-all") {
             preParams.splice(0, 1);
-            for (i in this.__rPermissions) {
+            for (i in this.__rPermissions[binding.arg]) {
                 rPermissions[i] = false;
             }
         }
@@ -51,25 +70,26 @@ Vue.directive('responsiveness', {
         var i = 0, item;
         while(item = preParams[i++]) {
             if (validInputs.indexOf(item) != -1) {
-                if (item.length ==2) {
-                    rPermissions[item]= true;
-                } else if (item.length == 9){ //hidden-..
+                if (item.startsWith("hidden")){ //hidden-..
                     var key = item.split("-")[1];
                     rPermissions[key] = false;
-                } 
+                } else {
+                    rPermissions[item]= true;
+                }  
             }
         }
         el.dataset.responsives = JSON.stringify(rPermissions);
     },
     inserted: function (el, binding, vnode) { 
         if (el.dataset.responsives == null) return 0;
-        
+        this.xy = this.xy || 0; this.xy++;
+        debugger;
         function checkDisplay() {
             var myPermissions = JSON.parse(el.dataset.responsives);
             var curWidth = el.ownerDocument.documentElement.offsetWidth;
             var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : "block";
-            for (i in this.__rPermissions) {
-                if (curWidth >= this.__rPermissions[i].min && curWidth <= this.__rPermissions[i].max) {
+            for (i in this.__rPermissions[binding.arg]) {
+                if (curWidth >= this.__rPermissions[binding.arg][i].min && curWidth <= this.__rPermissions[binding.arg][i].max) {
                     el.style.display = myPermissions[i] ? initial :"none";
                     break;
                 }
