@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Vue-Responsive Directive Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
+    <script src="Vue-Responsive.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 v-responsiveness="'hidden-all'" style="display:inline-flex;">Big Title</h1>
+        <h6 v-responsiveness="['hidden-sm']">Small Title</h6>
+        <p v-responsiveness="['hidden-all','xs']">Only visible xs</p>
+        <p v-responsiveness="['hidden-all','sm']">Only visible sm</p>
+        <p v-responsiveness="['hidden-all','md']">Only visible md</p>
+        <p v-responsiveness="['hidden-all','lg']">Only visible lg</p>
+        <p v-responsiveness="['hidden-all','xl']">Only visible xl</p>
+<img />
+        <span>Big Picutre Text</span>
+    </div>
+
+
+    <script>
+        new Vue({
+            el: "#app",
+        })
+    </script>
+</body>
+</html>
