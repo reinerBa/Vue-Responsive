@@ -14,7 +14,6 @@ Vue.directive('responsiveness', {
                     var name = new String(i).replace("responsiveMarks$$", "").toLowerCase();
                     this.__rPermissions[name] = {};
                     for (ii in vnode.context.$data[i]) this.__rPermissions[name][ii] = vnode.context.$data[i][ii];
-                    debugger;
                 }
             this.__rPermissions.undefined = { xs: { show: true, min: -1, max: 543 }, sm: { show: true, min: 544, max: 767 }, md: { show: true, min: 768, max: 991 }, lg: { show: true, min: 992, max: 1199 }, xl: { show: true, min: 1200, max: Infinity } };
             //:bs3
@@ -82,8 +81,7 @@ Vue.directive('responsiveness', {
     },
     inserted: function (el, binding, vnode) { 
         if (el.dataset.responsives == null) return 0;
-        this.xy = this.xy || 0; this.xy++;
-        debugger;
+
         function checkDisplay() {
             var myPermissions = JSON.parse(el.dataset.responsives);
             var curWidth = el.ownerDocument.documentElement.offsetWidth;
@@ -98,6 +96,7 @@ Vue.directive('responsiveness', {
         checkDisplay();
 
         var listenerName;
+        //Todo: throttle maybe, advised by mozilla dev
         window.addEventListener("resize", listenerName = checkDisplay);//arguments.callee(el, binding, vnode, 1) });
         vnode.respLis = listenerName
     },
@@ -106,3 +105,28 @@ Vue.directive('responsiveness', {
     }
 });
 
+
+/*
+var responsiveMixin = {
+    data: { "responsiveBreaks": {}, currentViewMode: "", currentViewWidth:0 },
+    methods: {
+
+    },
+    created: function () {
+        for (i in this)
+            if (i.startsWith("responsiveMarks$$")) {
+                var name = new String(i).replace("responsiveMarks$$", "").toLowerCase();
+                __rPermissions[name] = {};
+                for (ii in this[i])
+                    __rPermissions[name][ii] = this[i][ii];
+            }
+
+        console.log('created mixin! ' + this.interval_Array.length);
+    },
+    mounted: function () {
+
+    },
+    beforeDestroy: function () {
+
+    }
+}*/
