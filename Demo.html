@@ -1,3 +1,4 @@
+﻿<!--HtmlViewer:On-->
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -7,24 +8,44 @@
     <title>Vue-Responsive Directive Demo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
     <script src="Vue-Responsive.js"></script>
+    <style>
+        body{text-align:center;font-size:18px;font-weight:bold;font-family:'Segoe UI','Franklin Gothic Medium', Arial}
+        p:first-of-type{color:orange}
+        p:nth-child(2){color:forestgreen}
+        p:nth-child(3){color:Highlight}
+        p:nth-child(4){color:palevioletred}
+        p:nth-child(5){color:blueviolet}
+
+    </style>
 </head>
 <body>
     <div id="app">
-        <h1 v-responsiveness="'hidden-all'" style="display:inline-flex;">Big Title</h1>
+        <h1 v-responsiveness="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
+        <h3 v-responsiveness="['hidden-xl','hidden-md','hidden-lg']">A Vue.js directive for Responsivity</h3>
+        <p v-responsiveness="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals"/></p>
+        <p v-responsiveness="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
+        <p v-responsiveness="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
+        <p v-responsiveness="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
+        <p v-responsiveness="['hidden-all','xl']">Extra large<br /><img src="http://lorempixel.com/1200/360/animals" /></p>
+        <h1 v-responsiveness="'hidden-xs'">Very big Title</h1>
         <h6 v-responsiveness="['hidden-sm']">Small Title</h6>
-        <p v-responsiveness="['hidden-all','xs']">Only visible xs</p>
-        <p v-responsiveness="['hidden-all','sm']">Only visible sm</p>
-        <p v-responsiveness="['hidden-all','md']">Only visible md</p>
-        <p v-responsiveness="['hidden-all','lg']">Only visible lg</p>
-        <p v-responsiveness="['hidden-all','xl']">Only visible xl</p>
-<img />
-        <span>Big Picutre Text</span>
+    </div>
+    <div id="app2">
+        <h1 v-responsiveness="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
+        <h3 v-responsiveness="['hidden-xl','hidden-md','hidden-lg']">A Vue.js directive for Responsivity</h3>
+        <p v-responsiveness="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals" /></p>
+        <p v-responsiveness="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
+        <p v-responsiveness="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
+        <p v-responsiveness="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
+        <p v-responsiveness="['hidden-all','xl']">Extra large<br /><img src="http://lorempixel.com/1200/360/animals" /></p>
     </div>
 
-
     <script>
-        new Vue({
+        var demoEl=new Vue({
             el: "#app",
+        })
+        var demoEl2 = new Vue({
+            el: "#app2",
         })
     </script>
 </body>

@@ -6,7 +6,8 @@
 
 Vue.directive('responsiveness', {
     bind: function (el, binding, vnode) {
-        el.dataset.initialDisplay = el.style.display; //save the user defined css-value
+        if(el.style.display.length)
+            el.dataset.initialDisplay = el.style.display; //save the user defined css-value
 
         var preParams = [];
 
@@ -62,14 +63,14 @@ Vue.directive('responsiveness', {
     },
     inserted: function (el, binding, vnode) { 
         if (el.dataset.responsives == null) return 0;
-        console.log(el.dataset.responsives)
         
         function checkDisplay() {
             var myPermissions = JSON.parse(el.dataset.responsives);
             var curWidth = el.ownerDocument.documentElement.offsetWidth;
+            var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : "block";
             for (i in this.__rPermissions) {
                 if (curWidth >= this.__rPermissions[i].min && curWidth <= this.__rPermissions[i].max) {
-                    el.style.display = myPermissions[i] ? el.dataset.initialDisplay :"none";
+                    el.style.display = myPermissions[i] ? initial :"none";
                     break;
                 }
             }
@@ -78,23 +79,10 @@ Vue.directive('responsiveness', {
 
         var listenerName;
         window.addEventListener("resize", listenerName = checkDisplay);//arguments.callee(el, binding, vnode, 1) });
-        el.dataset.listener = JSON.stringify(listenerName);
+        vnode.respLis = listenerName
     },
-/*    update: function (el, binding, vnode){
-        if (this.__rPermissions == null) return 0;
-        
-        var myPermissions = JSON.parse(el.dataset.responsives);
-        var curWidth = el.ownerDocument.documentElement.offsetWidth;
-        for (i in this.__rPermissions) {
-            if (curWidth >= this.__rPermissions[i].min && curWidth <= this.__rPermissions[i].max) {
-                el.style.display = myPermissions[i] ? el.dataset.initialDisplay :"none";
-                break;
-            }
-        }
-    },
- */   unbind: function (el, binding, vnode) {
-        debugger;
-        window.removeEventListener("resize", JSON.parse(el.dataset.listener));//arguments.callee(el, binding, vnode, 1) });
+   unbind: function (el, binding, vnode) {
+       window.removeEventListener("resize", vnode.respLis);
     }
 });
 

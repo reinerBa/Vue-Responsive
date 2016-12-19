@@ -13,8 +13,15 @@ Just include the script and use the directive on a Html-Element inside a Vue Ele
 
     <script src="Vue-Responsive.js"></script>
     ...
+    <h1 v-responsiveness="'hidden-xs'">Big Title</h1>
     <div v-responsiveness="['hidden-all','md','lg']">Only visible in Middle and large Size View</div>
     <div v-responsiveness="['hidden-lg']">Only hidden at lg</div>
+
+    <h1 v-responsiveness="middleSize">Jumbotron</h1>
+	...	//in the vue element
+	data:{
+		middleSize:['hidden-all','lg','xl']
+	} 
 
     
 At default every resolution is visible, the hidden-all tag changes this to everything hidden (display:none). These tags are valid **hidden-all**, **xs**, **sm**, **md**, **lg**, **xl**, **hidden-xs**,...,**hidden-xl**.    
