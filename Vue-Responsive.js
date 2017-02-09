@@ -24,7 +24,6 @@ Vue.directive('responsiveness', {
             validInputs.push(i);
             validInputs.push("hidden-"+i);
         } 
-//        var validInputs = ["xs", "sm", "md", "lg", "xl", "hidden-xs", "hidden-sm", "hidden-md", "hidden-lg", "hidden-xl", "hidden-all"];
 
         if (el.style.display.length)
             el.dataset.initialDisplay = el.style.display; //save the user defined css-value
@@ -96,7 +95,6 @@ Vue.directive('responsiveness', {
         checkDisplay();
 
         var listenerName;
-        //Todo: throttle maybe, advised by mozilla dev
         window.addEventListener("resize", listenerName = checkDisplay);//arguments.callee(el, binding, vnode, 1) });
         vnode.respLis = listenerName
     },
@@ -106,27 +104,3 @@ Vue.directive('responsiveness', {
 });
 
 
-/*
-var responsiveMixin = {
-    data: { "responsiveBreaks": {}, currentViewMode: "", currentViewWidth:0 },
-    methods: {
-
-    },
-    created: function () {
-        for (i in this)
-            if (i.startsWith("responsiveMarks$$")) {
-                var name = new String(i).replace("responsiveMarks$$", "").toLowerCase();
-                __rPermissions[name] = {};
-                for (ii in this[i])
-                    __rPermissions[name][ii] = this[i][ii];
-            }
-
-        console.log('created mixin! ' + this.interval_Array.length);
-    },
-    mounted: function () {
-
-    },
-    beforeDestroy: function () {
-
-    }
-}*/
