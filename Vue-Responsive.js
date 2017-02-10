@@ -10,7 +10,7 @@ Vue.directive('responsiveness', {
         if (!this.__rPermissions) {
             this.__rPermissions = {};
             for (i in vnode.context.$data)
-                if (i.startsWith("responsiveMarks$$")) {
+                if (i.indexOf("responsiveMarks$$") === 0) {
                     var name = new String(i).replace("responsiveMarks$$", "").toLowerCase();
                     this.__rPermissions[name] = {};
                     for (ii in vnode.context.$data[i]) this.__rPermissions[name][ii] = vnode.context.$data[i][ii];
@@ -68,7 +68,7 @@ Vue.directive('responsiveness', {
         var i = 0, item;
         while(item = preParams[i++]) {
             if (validInputs.indexOf(item) != -1) {
-                if (item.startsWith("hidden")){ //hidden-..
+                if (item.indexOf("hidden")===0){ //hidden-..
                     var key = item.split("-")[1];
                     rPermissions[key] = false;
                 } else {
