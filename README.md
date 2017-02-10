@@ -2,6 +2,7 @@
 Brings a directive to use in specific html Elements. More Options are planned oriented at Bootstrap 4.
 -Todo: Mixin to use in Vue-Element methods etc.
 For Vue.js 2.0 only. 
+**WIP: Fix IE and document how to use own breakpoints
 
 ## Demo
 Demo [link](Demo.html)
