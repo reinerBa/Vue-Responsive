@@ -8,7 +8,7 @@ Is a directive to use responsive breakpoints on html elements. Because sometimes
  - A js file for webpacker
 
 ## Demo
-Demo [link](Demo.html)
+Demo [link](https://reinerba.github.io/Vue-Responsive/Demo.html)
 
 # Features
 
