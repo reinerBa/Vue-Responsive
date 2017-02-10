@@ -1,10 +1,10 @@
 # Vue-Responsive
-Brings a directive to use in specific html Elements. More Options are planned oriented at Bootstrap 4.
+Is a directive to use responsive breakpoints on html elements. Because sometimes its good to have a chance to let the view do resolution specific things.
 - **Dependencies:** Only Vue.js 2.0
 - **Browsers tested:** Chrome, Firefox and IE11+
-- **Todos:** 
+- **Planned:** 
  - Mixin to use in Vue-Element methods
- - classes instead of changing the style
+ - Add and remove classes instead of changing only the style
  - A js file for webpacker
 
 ## Demo
