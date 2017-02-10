@@ -1,7 +1,11 @@
 # Vue-Responsive
 Brings a directive to use in specific html Elements. More Options are planned oriented at Bootstrap 4.
--Todo: Mixin to use in Vue-Element methods etc.
-For Vue.js 2.0 only. 
+- **Dependencies:** Only Vue.js 2.0
+- **Browsers tested:** Chrome, Firefox and IE11+
+- **Todos:** 
+ - Mixin to use in Vue-Element methods
+ - classes instead of changing the style
+ - A js file for webpacker
 
 ## Demo
 Demo [link](Demo.html)
