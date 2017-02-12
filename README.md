@@ -52,5 +52,5 @@ First you have to declar your own breakpoints in the component/root wich wraps t
 
 You can declar as much own definitions as you wish. Every defintion should have **min:-1** for its smalles breakpoint and **max:Infinity** for its biggest.
 
-#License
+# License
 MIT
