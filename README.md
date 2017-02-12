@@ -1,5 +1,6 @@
 # Vue-Responsive
 Is a directive to use responsive breakpoints on html elements. Because sometimes its good to have a chance to let the view do resolution specific things.
+
 - **Dependencies:** Only Vue.js 2.0
 - **Browsers tested:** Chrome, Firefox and IE11+
 - **Planned:** 
