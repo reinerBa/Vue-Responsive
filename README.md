@@ -4,20 +4,32 @@ Is a directive to use responsive breakpoints on html elements. Because sometimes
 - **Dependencies:** Only Vue.js 2.0
 - **Browsers tested:** Chrome, Firefox and IE11+
 - **Planned:** 
- - Mixin to use in Vue-Element methods
+ - Mixin to trigger methods on breakpoint change
  - Add and remove classes instead of changing only the style
- - A js file for webpacker
-
-## Demo
-Demo [link](https://reinerba.github.io/Vue-Responsive/Demo.html)
+ 
+## Test-Demo
+The features of the directive can be observed at the Demo [link](https://reinerba.github.io/Vue-Responsive/Demo.html)
 
 # Features
+
+This directive adds responsive Feautures to single HTML-Elements without CSS or @Media.
+
+The default Responsive breaks follow Bootstrap 4 [Responsive Utils](https://v4-alpha.getbootstrap.com/layout/responsive-utilities/).
+
+The Bootstrap 3 breakpoints are includes as well.
 
 # Usage
 Just include the script and use the directive on a Html-Element inside a Vue Element
 
     <script src="Vue-Responsive.js"></script>
-The default Responsive breaks follow Bootstrap 4 [Responsive Utils](https://v4-alpha.getbootstrap.com/layout/responsive-utilities/).
+
+**Advanced:** If you do not want the directive to be globally available just add the attribute *notGlobal* with a not empty value in the script tag and define it the components with:
+
+    <script src="Vue-Responsive.min.js" notGlobal="true" ></script>	
+	...
+	direcitves:{
+		responsiveness: v_responsiveness
+	}
 
 ## For Bootstrap 4 breakpoints
 At default every resolution is visible, the hidden-all tag changes this to everything hidden (display:none). These tags are valid **hidden-all**, **xs**, **sm**, **md**, **lg**, **xl**, **hidden-xs**,...,**hidden-xl**.
