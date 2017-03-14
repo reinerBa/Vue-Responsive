@@ -19,6 +19,10 @@ The default Responsive breaks follow Bootstrap 4 [Responsive Utils](https://v4-a
 The Bootstrap 3 breakpoints are includes as well.
 
 # Usage
+It's available as npm package now 
+
+    npm install vue-responsive
+   
 Just include the script and use the directive on a Html-Element inside a Vue Element
 
     <script src="Vue-Responsive.js"></script>
