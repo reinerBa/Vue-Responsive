@@ -1,0 +1,32 @@
+{
+  "name": "vue-responsive",
+  "version": "0.1.2",
+  "description": "A Directive and Mixin for responsive handling with vue.js 2.0",
+  "main": "Vue-Responsive.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reinerBa/Vue-Responsive.git"
+  },
+  "keywords": [
+    "vuejs",
+    "responsive"
+  ],
+  "author": "Reiner Bamberger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reinerBa/Vue-Responsive/issues"
+  },
+  "homepage": "https://reinerba.github.io/Vue-Responsive/",
+  "dependencies": {
+    "vue": ">=2.1.7"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-uglify": "^2.1.0"
+  }
+}
