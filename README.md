@@ -4,8 +4,8 @@ Is a directive to use responsive breakpoints on html elements. Because sometimes
 - **Dependencies:** Only Vue.js 2.0
 - **Browsers tested:** Chrome, Firefox and IE11+
 - **Planned:** 
- - Mixin to trigger methods on breakpoint change
- - Add and remove classes instead of changing only the style
+	- Mixin to trigger methods on breakpoint change
+	- Add and remove classes instead of changing only the style
  
 ## Test-Demo
 The features of the directive can be observed at the Demo [link](https://reinerba.github.io/Vue-Responsive/Demo.html)

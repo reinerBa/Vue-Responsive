@@ -1,5 +1,5 @@
 /*!
- * Vue-Responsive v0.1.3
+ * Vue-Responsive v0.1.4
  * @Url: https://github.com/reinerBa/Vue-Responsive
  * @License: MIT, Reiner Bamberger
  */
@@ -83,7 +83,7 @@
 
 			function checkDisplay() {
 				var myPermissions = JSON.parse(el.dataset.responsives);
-				var curWidth = el.ownerDocument.documentElement.offsetWidth;
+				var curWidth = window.innerWidth;
 				var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : "block";
 				for (i in this.__rPermissions[binding.arg]) {
 					if (curWidth >= this.__rPermissions[binding.arg][i].min && curWidth <= this.__rPermissions[binding.arg][i].max) {

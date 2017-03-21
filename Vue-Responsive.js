@@ -83,7 +83,7 @@
 
 			function checkDisplay() {
 				var myPermissions = JSON.parse(el.dataset.responsives);
-				var curWidth = el.ownerDocument.documentElement.offsetWidth;
+				var curWidth = window.innerWidth;
 				var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : "block";
 				for (i in this.__rPermissions[binding.arg]) {
 					if (curWidth >= this.__rPermissions[binding.arg][i].min && curWidth <= this.__rPermissions[binding.arg][i].max) {
