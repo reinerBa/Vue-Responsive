@@ -1,11 +1,12 @@
 /*!
- * Vue-Responsive v0.1.4
+ * Vue-Responsive v0.1.5
  * @Url: https://github.com/reinerBa/Vue-Responsive
  * @License: MIT, Reiner Bamberger
  */
 (function(){
 	var vue_responsive={
 		bind: function (el, binding, vnode) {
+			var self=this;
 			//Bootstrap 4 Repsonsive Utils default
 			if (!this.__rPermissions) {
 				this.__rPermissions = {};
@@ -24,7 +25,20 @@
 				validInputs.push(i);
 				validInputs.push("hidden-"+i);
 			} 
-
+			
+			//to use just one resize-event-listener whoose functions can easy unbound
+			this.intervalInstId = ++this.intervalInstId || 1;
+			vnode.intervalInstId = String(this.intervalInstId);
+			if(typeof this.resizeListeners === 'undefined'){
+				this.resizeListeners={};
+				function callInstances(){
+					for(var i in self.resizeListeners)
+						if(!isNaN(i))
+							self.resizeListeners[i]();
+				}
+				window.addEventListener("resize", callInstances);		
+			}
+			
 			if (el.style.display.length){
 				el.dataset.initialDisplay = el.style.display; //save the user defined css-value
 			}
@@ -80,26 +94,25 @@
 		},
 		inserted: function (el, binding, vnode) { 
 			if (el.dataset.responsives == null) return 0;
-
+			var self=this;
+			
 			function checkDisplay() {
 				var myPermissions = JSON.parse(el.dataset.responsives);
 				var curWidth = window.innerWidth;
 				var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : "block";
-				for (i in this.__rPermissions[binding.arg]) {
-					if (curWidth >= this.__rPermissions[binding.arg][i].min && curWidth <= this.__rPermissions[binding.arg][i].max) {
+				for (i in self.__rPermissions[binding.arg]) {
+					if (curWidth >= self.__rPermissions[binding.arg][i].min && curWidth <= self.__rPermissions[binding.arg][i].max) {
 						el.style.display = myPermissions[i] ? initial :"none";
 						break;
 					}
 				}
 			};
 			checkDisplay();
-
-			var listenerName;
-			window.addEventListener("resize", listenerName = checkDisplay);//arguments.callee(el, binding, vnode, 1) });
-			vnode.respLis = listenerName
+			
+			this.resizeListeners[vnode.intervalInstId] = checkDisplay;
 		},
-		unbind: function (el, binding, vnode) {
-			window.removeEventListener("resize", vnode.respLis);
+		unbind: function (el, binding, vnode) { 
+			delete this.resizeListeners[vnode.intervalInstId];
 		}
 	};
 

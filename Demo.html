@@ -20,7 +20,8 @@
 </head>
 <body>
     <div id="app">
-         <h1 v-responsiveness="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
+        <section v-if="bindElements">
+		<h1 v-responsiveness="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
         <h2 v-responsiveness="['hidden-xl','hidden-md','hidden-lg']">A Vue.js directive for Responsivity</h2>
 
         <div>
@@ -46,6 +47,7 @@
             <i v-responsiveness="['hidden-all','lg']">Large </i>
             <i v-responsiveness="['hidden-all','xl']">Extra large</i>
             </div>
+		</section>
     </div>
     <h3>Bootstrap 3 breaks</h3>
     <div id="app2">
@@ -59,7 +61,7 @@
         var demoEl=new Vue({
             el: "#app",
             data: {
-                dataTrue:true,  
+                bindElements:true,  
                 respObj: { "xs": false, "hidden-xs": true, "hidden-xl": true },   //only the true counts like here http://vuejs.org/v2/guide/class-and-style.html
                 responsiveMarks$$myMarks:   //setting custom Responsive break marks with the name "myMarks"
                     { smartphone: { show: true, min: -1, max: 767 }, desktop: { show: true, min: 768, max: Infinity } }
