@@ -1,4 +1,6 @@
 # Vue-Responsive
+[![NPM](https://nodei.co/npm/vue-responsive.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-responsive/)
+
 Is a directive to use responsive breakpoints on html elements. Because sometimes its good to have a chance to let the view do resolution specific things.
 
 - **Dependencies:** Only Vue.js 2.0
