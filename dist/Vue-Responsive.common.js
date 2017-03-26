@@ -3,9 +3,9 @@
  * @Url: https://github.com/reinerBa/Vue-Responsive
  * @License: MIT, Reiner Bamberger
  */
-(function(){
-	"use strict";
-	var vue_responsive = {
+
+
+	export default {
 		bind: function (el, binding, vnode) {
 			var self=vnode;
 			//Bootstrap 4 Repsonsive Utils default
@@ -116,19 +116,4 @@
 		}
 	};
 
-	// Check if the directive should be used globally
-	var notGlobal=false;
-	try{
-		document.currentScript = document.currentScript || (function() {
-			var scripts = document.getElementsByTagName('script');
-			return scripts[scripts.length - 1];
-		})();
-		notGlobal= Boolean(document.currentScript.getAttribute('notGlobal'));
-	}catch(e){e}
-
-	if(!notGlobal && Vue)
-		Vue.directive('responsiveness', vue_responsive);
-	else
-		window.v_responsiveness= vue_responsive;
-
-})();
+	

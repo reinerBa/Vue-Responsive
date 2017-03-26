@@ -37,6 +37,8 @@ Just include the script and use the directive on a Html-Element inside a Vue Ele
 		responsiveness: v_responsiveness
 	}
 
+The commonJs file has to be included manually in every component or set golbally with `Vue.directive('responsiveness', Vue_Responsive);`
+
 ## For Bootstrap 4 breakpoints
 At default every resolution is visible, the hidden-all tag changes this to everything hidden (display:none). These tags are valid **hidden-all**, **xs**, **sm**, **md**, **lg**, **xl**, **hidden-xs**,...,**hidden-xl**.
 

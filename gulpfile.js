@@ -12,5 +12,14 @@ gulp.task('default',function(){
 		.pipe(uglify({preserveComments: 'license'}))
 		.pipe(rename('Vue-Responsive.min.js'))
 		.pipe(gulp.dest('./dist/'));
+		
+	gulp.src('./Vue-Responsive.js')
+		.pipe(replace(/(@@version@@)+/, version))		
+		.pipe(replace(/\(function\(\){/, ""))
+		.pipe(replace(/	"use strict";/, ""))
+		.pipe(replace(/var vue_responsive =/, "export default"))
+		.pipe(replace(/\/\/ Check if the directive(.|\s)*/g, ""))
+		.pipe(rename('Vue_Responsive.common.js'))
+		.pipe(gulp.dest('./dist/'));
 });
 
