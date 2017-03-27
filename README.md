@@ -1,7 +1,7 @@
 # Vue-Responsive
 [![NPM](https://nodei.co/npm/vue-responsive.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-responsive/)
 
-Is a directive to use responsive breakpoints on html elements. Because sometimes its good to have a chance to let the view do resolution specific things.
+Is a directive to use responsive breakpoints on html elements. Because sometimes it's nice to have a chance to let the view do resolution specific things.
 
 - **Dependencies:** Only Vue.js 2.0
 - **Browsers tested:** Chrome, Firefox and IE11+
@@ -37,7 +37,7 @@ Just include the script and use the directive on a Html-Element inside a Vue Ele
 		responsiveness: v_responsiveness
 	}
 
-The commonJs file has to be included manually in every component or set golbally with `Vue.directive('responsiveness', Vue_Responsive);`
+**Module Systems:** The commonJs file has to be included manually in every component or set golbally with `Vue.directive('responsiveness', Vue_Responsive);`
 
 ## For Bootstrap 4 breakpoints
 At default every resolution is visible, the hidden-all tag changes this to everything hidden (display:none). These tags are valid **hidden-all**, **xs**, **sm**, **md**, **lg**, **xl**, **hidden-xs**,...,**hidden-xl**.
