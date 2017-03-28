@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vue-Responsive Directive Demo</title>
     <script src="https://unpkg.com/vue"></script>
-    <script src="dist/Vue-Responsive.min.js" notGlobal=""></script>
-	<!--<script src="Vue-Responsive.js" notGlobal=""></script>-->
+    <!--<script src="dist/Vue-Responsive.min.js" notGlobal=""></script>-->
+	<script src="Vue-Responsive.js" notGlobal=""></script>
     <style>
         body{text-align:center;font-size:18px;font-weight:bold;font-family:'Segoe UI','Franklin Gothic Medium', Arial}
         p:first-of-type{color:orange}
@@ -17,14 +17,29 @@
         p:nth-child(4){color:palevioletred}
         p:nth-child(5){color:blueviolet}
         #topInfo{padding:4px;border:3px dashed orange;background-color:rgba(76, 255, 0,.4);position:fixed;top:0;left:0;width:60px;color:darkturquoise}
+		table td, table th {border: 1px solid black;padding: 3px;}
+		td:not(:empty):not(:first-of-type){background-color:lime;color:transparent;}
+		#app{margin-top: 60px;}
+		.italic{font-style: italic;}
+		.thin{font-weight: 100;}
+		.uppercase{text-transform: uppercase;}
     </style>
 </head>
 <body>
     <div id="app">
-        <section v-if="bindElements">
 		<h1 v-responsiveness="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
-        <h2 v-responsiveness="['hidden-xl','hidden-md','hidden-lg']">A Vue.js directive for Responsivity</h2>
+        <h2 v-responsiveness="['hidden-xl','hidden-lg','hidden-md']">A Vue.js directive for Responsivity</h2>
 
+		<div>Examples:</div>		
+		<table style="margin:15px auto;border-spacing:0;">
+		<tr><th>v-responsiveness=</th><th>XS</th><th>SM</th><th>MD</th><th>LG</th><th>XL</th></tr>
+		<tr><td>['hidden-all', 'xs', 'sm']</td><td>.</td><td></td><td></td><td></td><td></td></tr>
+		<tr><td>['hidden-xs', 'hidden-sm']</td><td>.</td><td>.</td><td></td><td></td><td></td></tr>
+		<tr><td>['hidden-xs', 'hidden-sm']</td><td><td><td>.</td><td>.</td><td>.</td></tr>
+		<tr><td>['hidden-all', 'lg', 'xl']</td><td></td><td></td><td></td><td>.</td><td>.</td></tr>
+		<tr><td>['hidden-all', 'xs', 'xl']</td><td>.</td><td></td><td></td><td></td><td>.</td></tr>
+		</table>
+        <section v-if="bindElements">
         <div>
             <p v-responsiveness="'hidden-xs'">*I am hidden on extra small device screens*</p>
             <p v-responsiveness="['hidden-sm']">*I am hidden on small device screens*</p>
@@ -49,6 +64,8 @@
             <i v-responsiveness="['hidden-all','xl']">Extra large</i>
             </div>
 		</section>
+		<label for="togglebox">Toggle Bind/Unbind of upper section:</label>
+		<input id="togglebox" type="checkbox" v-model="bindElements"/>
     </div>
     <h3>Bootstrap 3 breaks</h3>
     <div id="app2">
@@ -65,12 +82,20 @@
                 bindElements:true,  
                 respObj: { "xs": false, "hidden-xs": true, "hidden-xl": true },   //only the true counts like here http://vuejs.org/v2/guide/class-and-style.html
                 responsiveMarks$$myMarks:   //setting custom Responsive break marks with the name "myMarks"
-                    { smartphone: { show: true, min: -1, max: 767 }, desktop: { show: true, min: 768, max: Infinity } }
+                    { smartphone: { min: -1, max: 767 }, desktop: { min: 768, max: Infinity } }
             }
         })
         var demoEl2 = new Vue({
             el: "#app2",
         })
+		var demoEl3=new Vue({
+		el: "#app",
+		data: {
+			responsiveDefault$$: threeMarks,
+			responsiveMarks$$threeMarks:   //setting custom Responsive break marks with the name "myMarks"
+				{ one: { class: 'thin', min: -1, max: 900 },two: { class: 'italic', min: 901, max: 999 }, three: { class: 'uppercase', min: 1000, max: Infinity } }
+		}
+		})
     </script>
 </body>
 </html>
