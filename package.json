@@ -20,8 +20,8 @@
     "url": "https://github.com/reinerBa/Vue-Responsive/issues"
   },
   "homepage": "https://reinerba.github.io/Vue-Responsive/",
-  "dependencies": {
-    "vue": ">=2.1.7"
+  "peerDependencies": {
+    "vue": "2.x"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
