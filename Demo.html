@@ -8,7 +8,7 @@
     <title>Vue-Responsive Directive Demo</title>
     <script src="https://unpkg.com/vue"></script>
     <!--<script src="dist/Vue-Responsive.min.js" notGlobal=""></script>-->
-	<script src="Vue-Responsive.js" notGlobal=""></script>
+	<script src="dist/Vue-Responsive.min.js" notGlobal=""></script>
     <style>
         body{text-align:center;font-size:18px;font-weight:bold;font-family:'Segoe UI','Franklin Gothic Medium', Arial}
         p:first-of-type{color:orange}
@@ -74,7 +74,13 @@
         <p v-responsiveness:bs3="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
         <p v-responsiveness:bs3="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
     </div>
-
+    <h3>Self defined default-Bp. and class instead of hide</h3>
+    <div id="app3">
+        <p v-responsiveness="['hidden-all','one']">One - extra thin</p>
+        <p v-responsiveness="['hidden-all','three']">Only three "visible"</p>
+        <p v-responsiveness="['hidden-one']">"hidde"-one</p>
+    </div>
+	
     <script>
         var demoEl=new Vue({
             el: "#app",
@@ -89,9 +95,9 @@
             el: "#app2",
         })
 		var demoEl3=new Vue({
-		el: "#app",
+		el: "#app3",
 		data: {
-			responsiveDefault$$: threeMarks,
+			responsiveDefault$$: "threeMarks",
 			responsiveMarks$$threeMarks:   //setting custom Responsive break marks with the name "myMarks"
 				{ one: { class: 'thin', min: -1, max: 900 },two: { class: 'italic', min: 901, max: 999 }, three: { class: 'uppercase', min: 1000, max: Infinity } }
 		}

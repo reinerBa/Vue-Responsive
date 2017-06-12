@@ -14,9 +14,9 @@
 			if (!self.__rPermissions) {
 				self.__rPermissions = {};
 				//bs4
-				self.__rPermissions.bs4 = { xs: { class: true, min: -1, max: 543 }, sm: { class: true, min: 544, max: 767 }, md: { class: true, min: 768, max: 991 }, lg: { class: true, min: 992, max: 1199 }, xl: { class: true, min: 1200, max: Infinity } };
+				self.__rPermissions.bs4 = { xs: { class: !1, min: -1, max: 543 }, sm: { class: !1, min: 544, max: 767 }, md: { class: !1, min: 768, max: 991 }, lg: { class: !1, min: 992, max: 1199 }, xl: { class: !1, min: 1200, max: Infinity } };
 				//:bs3
-				self.__rPermissions.bs3 = { xs: { class: true, min: -1, max: 767 }, sm: { class: true, min: 768, max: 991 }, md: { class: true, min: 992, max: 1199 }, lg: { class: true, min: 1200, max: Infinity } };
+				self.__rPermissions.bs3 = { xs: { class: !1, min: -1, max: 767 }, sm: { class: !1, min: 768, max: 991 }, md: { class: !1, min: 992, max: 1199 }, lg: { class: !1, min: 1200, max: Infinity } };
 				
 				for (var i in vnode.context.$data){
 					if (i.indexOf("responsiveMarks$$") === 0) {
@@ -112,23 +112,12 @@
 				for (var i in self.__rPermissions[binding.arg]) {
 					if (curWidth >= self.__rPermissions[binding.arg][i].min && curWidth <= self.__rPermissions[binding.arg][i].max) {
 						el.style.display = myPermissions[i] ? initial :"none";
-						if(myPermissions[i])
-							if(el.classList.contains("vResponsiveHidden")){
-								el.classList.remove("vResponsiveHidden");
-								el.classList.add("vResponsiveVisible");
-							}
-						else
-							if(el.classList.contains("vResponsiveVisible")){
-								el.classList.remove("vResponsiveVisible");
-								el.classList.add("vResponsiveHidden");
-							}
+						vnode.__r
 						break;
 					}
 				}
 			};
 			checkDisplay();
-			el.classList.toggle("vResponsiveHidden", (el.style.display === 'none'));
-			el.classList.toggle("vResponsiveVisible", !(el.style.display === 'none'));
 			
 			var resizeListenerId = JSON.parse(el.dataset.responsives).rId;
 			self.resizeListeners[resizeListenerId] = checkDisplay;
