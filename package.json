@@ -1,6 +1,6 @@
 {
   "name": "vue-responsive",
-  "version": "0.1.6",
+  "version": "0.1.9",
   "description": "A Directive and Mixin for responsive handling with vue.js 2.0",
   "main": "Vue-Responsive.js",
   "scripts": {

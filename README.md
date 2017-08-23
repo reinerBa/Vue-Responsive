@@ -6,8 +6,8 @@ Is a directive to use responsive breakpoints on html elements. Because sometimes
 - **Dependencies:** Only Vue.js 2.0
 - **Browsers tested:** Chrome, Firefox and IE11+
 - **Planned:** 
-	- Mixin to trigger methods on breakpoint change
-	- Add and remove classes instead of changing only the style
+  - Mixin to trigger methods on breakpoint change
+  - Add and remove classes instead of changing only the style
  
 ## Test-Demo
 The features of the directive can be observed at the Demo [link](https://reinerba.github.io/Vue-Responsive/Demo.html)
@@ -21,11 +21,12 @@ The default Responsive breaks follow Bootstrap 4 [Responsive Utils](https://v4-a
 The Bootstrap 3 breakpoints are includes as well.
 
 # Usage
-It's available as npm package now 
+With npm and ES6/babel please use the common module:
 
-    npm install vue-responsive
-   
-Just include the script and use the directive on a Html-Element inside a Vue Element
+    npm install vue-responsive -save
+    import vueResponsive from 'vue-responsive/dist/Vue_Responsive.common'
+
+In the browser just include the script and use the directive on a Html-Element inside a Vue Element
 
     <script src="Vue-Responsive.js"></script>
 

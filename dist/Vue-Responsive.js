@@ -1,25 +1,36 @@
 /*!
- * Vue-Responsive v0.1.5
+ * Vue-Responsive v0.1.9
  * @Url: https://github.com/reinerBa/Vue-Responsive
  * @License: MIT, Reiner Bamberger
  */
 (function(){
 	"use strict";
-	var vue_responsive = {
+	var vue_responsive = (function(){
+		var self={};
+		return{
 		bind: function (el, binding, vnode) {
-			var self=vnode;
 			//Bootstrap 4 Repsonsive Utils default
+			var componentHasDefault=false;
 			if (!self.__rPermissions) {
 				self.__rPermissions = {};
-				for (var i in vnode.context.$data)
-					if (i.indexOf("responsiveMarks$$") === 0) {
-						var name = new String(i).replace("responsiveMarks$$", "").toLowerCase();
-						self.__rPermissions[name] = {};
-						for (var ii in vnode.context.$data[i]) self.__rPermissions[name][ii] = vnode.context.$data[i][ii];
-					}
-				self.__rPermissions.undefined = { xs: { show: true, min: -1, max: 543 }, sm: { show: true, min: 544, max: 767 }, md: { show: true, min: 768, max: 991 }, lg: { show: true, min: 992, max: 1199 }, xl: { show: true, min: 1200, max: Infinity } };
+				//bs4
+				self.__rPermissions.bs4 = { xs: { class: !1, min: -1, max: 543 }, sm: { class: !1, min: 544, max: 767 }, md: { class: !1, min: 768, max: 991 }, lg: { class: !1, min: 992, max: 1199 }, xl: { class: !1, min: 1200, max: Infinity } };
 				//:bs3
-				self.__rPermissions.bs3 = { xs: { show: true, min: -1, max: 767 }, sm: { show: true, min: 768, max: 991 }, md: { show: true, min: 992, max: 1199 }, lg: { show: true, min: 1200, max: Infinity } };
+				self.__rPermissions.bs3 = { xs: { class: !1, min: -1, max: 767 }, sm: { class: !1, min: 768, max: 991 }, md: { class: !1, min: 992, max: 1199 }, lg: { class: !1, min: 1200, max: Infinity } };
+				
+				for (var i in vnode.context.$data){
+					if (i.indexOf("responsiveMarks$$") === 0) {
+						var name = String(i).replace("responsiveMarks$$", "").toLowerCase();
+						self.__rPermissions[name] = {};
+						for (var ii in vnode.context.$data[i]) 
+							self.__rPermissions[name][ii] = vnode.context.$data[i][ii];
+					}
+					if (i === "responsiveDefault$$")
+						componentHasDefault = vnode.context.$data[i];
+				}
+				// Set bs4 as default if not default is explicitly set
+				self.__rPermissions.undefined = componentHasDefault ? self.__rPermissions[componentHasDefault] : self.__rPermissions.bs4;				
+
 			}
 			var validInputs = ['hidden-all'];
 			for (var i in self.__rPermissions[binding.arg]) {
@@ -28,8 +39,8 @@
 			} 
 			
 			//to use just one resize-event-listener whoose functions can easy unbound
-			self.intervalInstId = ++self.intervalInstId || 1;
-			vnode.intervalInstId = String(self.intervalInstId);
+			self.__rIntervalInstId = ++self.__rIntervalInstId || 1;
+			var rPermissions = { rId : String(self.__rIntervalInstId)};
 			if(typeof self.resizeListeners === 'undefined'){
 				self.resizeListeners={};
 				function callInstances(){
@@ -67,7 +78,6 @@
 			}
 			if (!preParams) return 0;
 
-			var rPermissions = {};
 			for (var k in self.__rPermissions[binding.arg]){
 				rPermissions[k] = true;
 			}
@@ -94,7 +104,6 @@
 		},
 		inserted: function (el, binding, vnode) { 
 			if (el.dataset.responsives == null) return 0;
-			var self=vnode;
 			
 			function checkDisplay() {
 				var myPermissions = JSON.parse(el.dataset.responsives);
@@ -103,18 +112,21 @@
 				for (var i in self.__rPermissions[binding.arg]) {
 					if (curWidth >= self.__rPermissions[binding.arg][i].min && curWidth <= self.__rPermissions[binding.arg][i].max) {
 						el.style.display = myPermissions[i] ? initial :"none";
+						vnode.__r
 						break;
 					}
 				}
 			};
 			checkDisplay();
 			
-			self.resizeListeners[vnode.intervalInstId] = checkDisplay;
+			var resizeListenerId = JSON.parse(el.dataset.responsives).rId;
+			self.resizeListeners[resizeListenerId] = checkDisplay;
 		},
 		unbind: function (el, binding, vnode) { 
-			delete self.resizeListeners[vnode.intervalInstId];
+			var resizeListenerId = JSON.parse(el.dataset.responsives).rId;
+			delete self.resizeListeners[resizeListenerId];
 		}
-	};
+	}})();
 
 	// Check if the directive should be used globally
 	var notGlobal=false;
@@ -126,9 +138,9 @@
 		notGlobal= Boolean(document.currentScript.getAttribute('notGlobal'));
 	}catch(e){e}
 
-	if(!notGlobal && Vue)
+	if(!notGlobal && typeof(Vue) !== 'undefined' && !!Vue.directive)
 		Vue.directive('responsiveness', vue_responsive);
-	else
+	else if(typeof(window) !== 'undefined')
 		window.v_responsiveness= vue_responsive;
 
 })();
