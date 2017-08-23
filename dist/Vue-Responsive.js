@@ -1,5 +1,5 @@
 /*!
- * Vue-Responsive v0.1.6
+ * Vue-Responsive v0.1.9
  * @Url: https://github.com/reinerBa/Vue-Responsive
  * @License: MIT, Reiner Bamberger
  */
@@ -138,9 +138,9 @@
 		notGlobal= Boolean(document.currentScript.getAttribute('notGlobal'));
 	}catch(e){e}
 
-	if(!notGlobal && Vue)
+	if(!notGlobal && typeof(Vue) !== 'undefined' && !!Vue.directive)
 		Vue.directive('responsiveness', vue_responsive);
-	else
+	else if(typeof(window) !== 'undefined')
 		window.v_responsiveness= vue_responsive;
 
 })();
