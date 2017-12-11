@@ -3,19 +3,45 @@
 [![npm](https://img.shields.io/npm/v/vue-responsive.svg)](https://www.npmjs.com/package/vue-responsive)
 [![GitHub stars](https://img.shields.io/github/stars/reinerBa/Vue-Responsive.svg)](https://github.com/reinerBa/Vue-Responsive/stargazers)
 [![license](https://img.shields.io/github/license/reinerBa/Vue-Responsive.svg)](https://github.com/reinerBa/vue-responsive/blob/master/LICENSE)
+[![Github file size](https://img.shields.io/github/size/reinerBa/Vue-Responsive/dist/Vue-Responsive.min.js.svg)](https://raw.githubusercontent.com/reinerBa/Vue-Responsive/master/dist/Vue-Responsive.min.js)
 
 [![NPM](https://nodei.co/npm/vue-responsive.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-responsive/)
 
 Is a directive to use responsive breakpoints on html elements. Because sometimes it's nice to have a chance to let the view do resolution specific things.
 
-- **Dependencies:** Only Vue.js 2.0
-- **Browsers tested:** Chrome, Firefox and IE11+
-- **Planned:** 
-  - Mixin to trigger methods on breakpoint change
-  - Add and remove classes instead of changing only the style
- 
-## Test-Demo
-The features of the directive can be observed at the Demo [link](https://reinerba.github.io/Vue-Responsive/Demo.html)
+- **No further Dependencies** 
+- **🔧 Chrome, Firefox, IE11+**
+
+
+📺 Check the [Demo-link](https://reinerba.github.io/Vue-Responsive/Demo.html)
+
+## 🔧  Install
+`npm install vue-responsive`
+
+
+## 👈 Small usage example
+
+```javascript
+
+<template>
+  <div>
+    <h1 v-responsiveness="'hidden-xs'">Big Title</h1>
+    <div v-responsiveness="['hidden-all','xs','sm']">
+      Only visible in small and extra-small windows
+    </div>
+
+    <h1 v-responsiveness="middleSize">Big Jumbotron</h1>
+  </div>
+</template>
+
+<script>
+  Vue.directive('responsiveness', Vue_Responsive)
+  ...
+  data:{
+	middleSize: ['hidden-all','lg','xl']
+  } 
+</script>
+```
 
 # Features
 
@@ -82,6 +108,11 @@ First you have to declar your own breakpoints in the component/root wich wraps t
     <p v-responsiveness:twoMarks="'hidden-desktop'">Visible on smartphone<br /><img src="http://lorempixel.com/360/240/animals" /></p>
 
 You can declar as much own definitions as you wish. Every defintion should have **min:-1** for its smalles breakpoint and **max:Infinity** for its biggest.
+
+
+### Planned 
+  - Mixin to trigger methods on breakpoint change
+  - Add and remove classes instead of changing only the style
 
 # License
 MIT [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE.md)
