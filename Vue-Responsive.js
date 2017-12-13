@@ -31,7 +31,7 @@
           self.__rPermissions.undefined = componentHasDefault ? self.__rPermissions[componentHasDefault] : self.__rPermissions.bs4
         }
         var validInputs = ['hidden-all']
-        for (var i in self.__rPermissions[binding.arg]) {
+        for (i in self.__rPermissions[binding.arg]) {
           validInputs.push(i)
           validInputs.push('hidden-' + i)
         }
@@ -61,7 +61,7 @@
           }
           preParams.sort()
         } else if (typeof binding.value === 'object') {
-          for (var i in binding.value) {
+          for (i in binding.value) {
             if (binding.value[i]) preParams.push(i)
           }
         } else if (typeof binding.value === 'string' || typeof binding.expression === 'string') { // a single parameter
@@ -80,14 +80,14 @@
 
         if (preParams[0] === 'hidden-all') {
           preParams.splice(0, 1)
-          for (var i in self.__rPermissions[binding.arg]) {
+          for (i in self.__rPermissions[binding.arg]) {
             rPermissions[i] = false
           }
         }
 
         var item
         i = 0
-        while (item = preParams[i++]) {
+        while ((item = preParams[i++])) {
           if (validInputs.indexOf(item) !== -1) {
             if (item.indexOf('hidden') === 0) { // hidden-..
               var key = item.split('-')[1]
@@ -109,7 +109,6 @@
           for (var i in self.__rPermissions[binding.arg]) {
             if (curWidth >= self.__rPermissions[binding.arg][i].min && curWidth <= self.__rPermissions[binding.arg][i].max) {
               el.style.display = myPermissions[i] ? initial : 'none'
-              vnode.__r
               break
             }
           }
@@ -128,14 +127,16 @@
 
   // Check if the directive should be used globally
   var notGlobal = false
+  var currScriptFn = document.currentScript
   try {
-    document.currentScript = document.currentScript || (function () {
+    currScriptFn = currScriptFn || (function () {
       var scripts = document.getElementsByTagName('script')
       return scripts[scripts.length - 1]
     })()
-    notGlobal = Boolean(document.currentScript.getAttribute('notGlobal'))
-  } catch (e) { e }
+    notGlobal = Boolean(currScriptFn.getAttribute('notGlobal'))
+  } catch (idk) { console.error(idk) }
 
+  /* global Vue */
   if (!notGlobal && typeof Vue !== 'undefined' && !!Vue.directive) {
     Vue.directive('responsiveness', vueResponsive)
   } else if (typeof window !== 'undefined') {
