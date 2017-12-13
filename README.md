@@ -15,6 +15,8 @@ Is a directive to use responsive breakpoints on html elements. Because sometimes
 
 📺 Check the [Demo-link](https://reinerba.github.io/Vue-Responsive/Demo.html)
 
+📖 [Docs](https://reinerba.github.io/Vue-Responsive/Documentation/)
+
 ## 🔧  Install
 `npm install vue-responsive`
 
