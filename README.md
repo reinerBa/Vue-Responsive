@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Documentation/logo.png" />
+</p>
+
 # Vue-Responsive
 [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 [![npm](https://img.shields.io/npm/v/vue-responsive.svg)](https://www.npmjs.com/package/vue-responsive)
