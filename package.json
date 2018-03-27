@@ -25,12 +25,11 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-library-umd": "^1.0.1",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-standard": "^10.1.1",
-    "gulp-uglify": "^2.1.0",
-    "gulp-library-umd": "^1.0.1"
+    "gulp-replace": "^0.6.1",
+    "gulp-standard": "^10.1.2",
+    "gulp-uglify": "^2.1.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
