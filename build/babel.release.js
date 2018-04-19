@@ -7,7 +7,7 @@ const result = babel.transformFileSync('./src/index.js', {
   'presets': [
     ['env', {
       'targets': {
-        'browsers': ['> 1%', 'last 2 versions', 'not ie <= 8']
+        'browsers': ['last 2 versions', 'not ie <= 10']
       }
     }], 'stage-2'
   ],
