@@ -25,8 +25,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
-      ],
+        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'demo-spa.html') }
+      ]
     },
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
@@ -41,10 +41,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
-      poll: config.dev.poll,
+      poll: config.dev.poll
     }
   },
   plugins: [
+ // function () {this.plugin('done', function (stats) {if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') == -1) {console.log(stats.compilation.errors)process.exit(1)}})},
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
@@ -53,8 +54,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
+      filename: 'demo-spa.html',
+      template: 'demo-spa.html',
       inject: true
     }),
     // copy custom static assets
@@ -82,7 +83,7 @@ module.exports = new Promise((resolve, reject) => {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`]
         },
         onErrors: config.dev.notifyOnErrors
         ? utils.createNotifierCallback()

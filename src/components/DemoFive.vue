@@ -4,6 +4,7 @@
     <pre v-responsive="-1024" class="language-html demo-block"><code v-text="text2"></code></pre>
     <pre v-responsive="+1024 && -1440" class="language-html demo-block"><code v-text="text3"></code></pre>
     <pre v-responsive="+1440" class="language-html demo-block"><code v-text="text4"></code></pre>
+    <pre v-responsive="992" class="language-html demo-block"><code v-text="text5"></code></pre>
   </div>
 </template>
 
@@ -23,6 +24,9 @@ export default {
 </span>`,
       text4: `<span v-responsive="+1440">
   Visible@ >=1440px
+</span>`,
+      text5: `<span v-responsive="992">
+  Visible@ >=992px
 </span>`
     }
   }

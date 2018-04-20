@@ -51,14 +51,36 @@ const bootstrap3Breakpoints = {
   }
 }
 
+function shortIntoBreakpoint (str, rValue) {
+  // is positive ?
+  if (str.indexOf('+') === 0) {
+    rValue.min = Number(str)
+  } else {
+    rValue.max = Number(str) * -1
+  }
+}
+
+function isShortSyntax (binding) {
+  var isShort = typeof (binding.value) === 'number' || (typeof (binding.expression) === 'string' &&
+    (binding.expression.indexOf('+') === 0 || binding.expression.indexOf('-') === 0 || !isNaN(binding.expression[0])))
+
+  if (!isShort) return false
+  var rValue = {}
+  if (~binding.expression.indexOf('&&')) { // is range?
+    binding.expression.split('&&').map(e => e.trim()).forEach(e => shortIntoBreakpoint(e, rValue))
+  } else {
+    shortIntoBreakpoint(binding.expression.trim(), rValue)
+  }
+  return rValue
+}
+
 var vueResponsive = (function () {
   'use strict'
   var self = {idIncrement: 1, resizeListeners: null}
   return {
     bind: function (el, binding, vnode) {
-      var isShortSyntax = typeof (binding.expression) === 'string' &&
-        (binding.expression.indexOf('+') === 0 || binding.expression.indexOf('-') === 0)
-      console.log(binding)
+      var isShort = isShortSyntax(binding)
+      console.log(isShort)
       // Bootstrap 4 Repsonsive Utils default
       var componentHasDefault = false
       if (!self._rPermissions) {
