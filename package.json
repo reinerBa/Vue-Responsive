@@ -1,6 +1,6 @@
 {
   "name": "vue-responsive",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "A plugin for responsive design without media querys for Vue.js 2.x",
   "main": "src/index.js",
   "scripts": {
