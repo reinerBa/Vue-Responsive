@@ -8,7 +8,7 @@
     <title>Vue-Responsive Directive Demo</title>
     <script src="https://unpkg.com/vue"></script>
     <!--<script src="dist/Vue-Responsive.min.js" notGlobal=""></script>-->
-	<script src="dist/Vue-Responsive.min.js" notGlobal=""></script>
+	<script src="dist/Vue-Responsive.js" notGlobal=""></script>
     <style>
         body{text-align:center;font-size:18px;font-weight:bold;font-family:'Segoe UI','Franklin Gothic Medium', Arial}
         p:first-of-type{color:orange}
@@ -27,12 +27,12 @@
 </head>
 <body>
     <div id="app">
-		<h1 v-responsiveness="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
-        <h2 v-responsiveness="['hidden-xl','hidden-lg','hidden-md']">A Vue.js directive for Responsivity</h2>
+		<h1 v-responsive="['hidden-all','xl','lg','md']">A Vue.js directive for Responsivity</h1>
+    <h2 v-responsive="['hidden-xl','hidden-lg','hidden-md']">A Vue.js directive for Responsivity</h2>
 
-		<div>Examples:</div>		
+		<div>Examples:</div>
 		<table style="margin:15px auto;border-spacing:0;">
-		<tr><th>v-responsiveness=</th><th>XS</th><th>SM</th><th>MD</th><th>LG</th><th>XL</th></tr>
+		<tr><th>v-responsive=</th><th>XS</th><th>SM</th><th>MD</th><th>LG</th><th>XL</th></tr>
 		<tr><td>['hidden-all', 'xs', 'sm']</td><td>.</td><td></td><td></td><td></td><td></td></tr>
 		<tr><td>['hidden-xs', 'hidden-sm']</td><td>.</td><td>.</td><td></td><td></td><td></td></tr>
 		<tr><td>['hidden-xs', 'hidden-sm']</td><td><td><td>.</td><td>.</td><td>.</td></tr>
@@ -41,27 +41,27 @@
 		</table>
         <section v-if="bindElements">
         <div>
-            <p v-responsiveness="'hidden-xs'">*I am hidden on extra small device screens*</p>
-            <p v-responsiveness="['hidden-sm']">*I am hidden on small device screens*</p>
-            <span v-responsiveness="respObj">#This elements visibility is controlled by an object</span>
+            <p v-responsive="'hidden-xs'">*I am hidden on extra small device screens*</p>
+            <p v-responsive="['hidden-sm']">*I am hidden on small device screens*</p>
+            <span v-responsive="respObj">#This elements visibility is controlled by an object</span>
         </div>
-        <p v-responsiveness ="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals"/></p>
-        <p v-responsiveness ="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
-        <p v-responsiveness ="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
-        <p v-responsiveness ="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
-        <p v-responsiveness ="['hidden-all','xl']">Extra large<br /><img src="http://lorempixel.com/1200/360/animals" /></p>
+        <p v-responsive ="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals"/></p>
+        <p v-responsive ="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
+        <p v-responsive ="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
+        <p v-responsive ="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
+        <p v-responsive ="['hidden-all','xl']">Extra large<br /><img src="http://lorempixel.com/1200/360/animals" /></p>
 
         <h3>Lets set up own break points (smartphone / desktop)</h3>
         <div>
-            <p v-responsiveness:myMarks="'hidden-desktop'">Visible on smartphone<br /><img src="http://lorempixel.com/360/240/animals" /></p>
-            <p v-responsiveness:myMarks="['hidden-smartphone']">Visible on desktop<br /><img src="http://lorempixel.com/780/360/animals" /></p>
+            <p v-responsive:myMarks="'hidden-desktop'">Visible on smartphone<br /><img src="http://lorempixel.com/360/240/animals" /></p>
+            <p v-responsive:myMarks="['hidden-smartphone']">Visible on desktop<br /><img src="http://lorempixel.com/780/360/animals" /></p>
         </div>
-        <div id="topInfo"> 
-            <i v-responsiveness="['hidden-all','xs']">Extra small</i>
-            <i v-responsiveness="['hidden-all','sm']">Small </i>
-            <i v-responsiveness="['hidden-all','md']">Middle</i>
-            <i v-responsiveness="['hidden-all','lg']">Large </i>
-            <i v-responsiveness="['hidden-all','xl']">Extra large</i>
+        <div id="topInfo">
+            <i v-responsive="['hidden-all','xs']">Extra small</i>
+            <i v-responsive="['hidden-all','sm']">Small </i>
+            <i v-responsive="['hidden-all','md']">Middle</i>
+            <i v-responsive="['hidden-all','lg']">Large </i>
+            <i v-responsive="['hidden-all','xl']">Extra large</i>
             </div>
 		</section>
 		<label for="togglebox">Toggle Bind/Unbind of upper section:</label>
@@ -69,23 +69,23 @@
     </div>
     <h3>Bootstrap 3 breaks</h3>
     <div id="app2">
-        <p v-responsiveness:bs3="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals" /></p>
-        <p v-responsiveness:bs3="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
-        <p v-responsiveness:bs3="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
-        <p v-responsiveness:bs3="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
+        <p v-responsive:bs3="['hidden-all','xs']">Extra small<br /><img src="http://lorempixel.com/360/240/animals" /></p>
+        <p v-responsive:bs3="['hidden-all','sm']">Small <br /><img src="http://lorempixel.com/540/360/animals" /></p>
+        <p v-responsive:bs3="['hidden-all','md']">Middle<br /><img src="http://lorempixel.com/720/360/animals" /></p>
+        <p v-responsive:bs3="['hidden-all','lg']">Large <br /><img src="http://lorempixel.com/780/360/animals" /></p>
     </div>
     <h3>Self defined default-Bp. and class instead of hide</h3>
     <div id="app3">
-        <p v-responsiveness="['hidden-all','one']">One - extra thin</p>
-        <p v-responsiveness="['hidden-all','three']">Only three "visible"</p>
-        <p v-responsiveness="['hidden-one']">"hidde"-one</p>
+        <p v-responsive="['hidden-all','one']">One - extra thin</p>
+        <p v-responsive="['hidden-all','three']">Only three "visible"</p>
+        <p v-responsive="['hidden-one']">"hidde"-one</p>
     </div>
-	
+
     <script>
         var demoEl=new Vue({
             el: "#app",
             data: {
-                bindElements:true,  
+                bindElements:true,
                 respObj: { "xs": false, "hidden-xs": true, "hidden-xl": true },   //only the true counts like here http://vuejs.org/v2/guide/class-and-style.html
                 responsiveMarks$$myMarks:   //setting custom Responsive break marks with the name "myMarks"
                     { smartphone: { min: -1, max: 767 }, desktop: { min: 768, max: Infinity } }
