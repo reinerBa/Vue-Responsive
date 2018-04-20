@@ -38,6 +38,18 @@ import responsive from ('vue-responsive')
 Vue.use(responsive)`
 ```
 
+## 👈 Shortest usecase
+
+Just put the breakpoint identifiers behind the directive with dots:
+
+```html
+
+   <div v-responsive.lg.xs >Only visible on desktop !</div>
+
+   <div v-responsive.md    >Visible on tablet ☺</div>
+
+   <div v-responsive.sm.xs >Only visible on smartphone!</div>
+```
 
 ## 👈 Small usage example
 
