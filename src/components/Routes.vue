@@ -17,10 +17,11 @@ import DemoOne from './DemoOne'
 import DemoTwo from './DemoTwo'
 import DemoThree from './DemoThree'
 import DemoFour from './DemoFour'
+import DemoFive from './DemoFive'
 
 export default {
   name: 'Routes',
-  components: {DemoOne, DemoTwo, DemoThree, DemoFour},
+  components: {DemoOne, DemoTwo, DemoThree, DemoFour, DemoFive},
   data () {
     return {
       marked: 'demoOne',
@@ -36,6 +37,9 @@ export default {
         },
         demoFour: {
           title: 'Demo 4'
+        },
+        demoFive: {
+          title: 'Demo 5'
         }
       }
     }

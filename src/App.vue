@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <routes></routes>
-    <img src="./assets/logo.png">
     <HelloWorld/>
     <top-info></top-info>
     <footer>

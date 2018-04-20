@@ -56,6 +56,9 @@ var vueResponsive = (function () {
   var self = {idIncrement: 1, resizeListeners: null}
   return {
     bind: function (el, binding, vnode) {
+      var isShortSyntax = typeof (binding.expression) === 'string' &&
+        (binding.expression.indexOf('+') === 0 || binding.expression.indexOf('-') === 0)
+      console.log(binding)
       // Bootstrap 4 Repsonsive Utils default
       var componentHasDefault = false
       if (!self._rPermissions) {
@@ -136,9 +139,9 @@ var vueResponsive = (function () {
         if (validInputs.indexOf(item) === -1) continue
         if (item.indexOf('hidden') === 0) { // hidden-..
           var key = item.split('-')[1]
-          rPermissions[key] = 0		// show = false
+          rPermissions[key] = 0 // show = false
         } else {
-          rPermissions[item] = 1	// show = true
+          rPermissions[item] = 1 // show = true
         }
       }
 
@@ -163,7 +166,7 @@ var vueResponsive = (function () {
         var myPermissions = JSON.parse(el.dataset.responsives)
         var curWidth = window.innerWidth
         var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : 'block'
-		var parameters = self._rPermissions[binding.arg]
+        var parameters = self._rPermissions[binding.arg]
         for (let i in parameters) {
           if (curWidth >= parameters[i].min && curWidth <= parameters[i].max) {
             el.style.display = myPermissions[i] ? initial : 'none'
