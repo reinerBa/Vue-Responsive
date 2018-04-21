@@ -44,7 +44,7 @@ Just put the breakpoint identifiers behind the directive with dots:
 
 ```html
 
-   <div v-responsive.lg.xs >Only visible on desktop !</div>
+   <div v-responsive.lg.xl >Only visible on desktop !</div>
 
    <div v-responsive.md    >Visible on tablet ☺</div>
 
