@@ -37,27 +37,22 @@
   // For Bootstrap 4
   var bootstrap4Breakpoints = {
     xs: {
-      class: false,
       min: -1,
       max: 543
     },
     sm: {
-      class: false,
       min: 544,
       max: 767
     },
     md: {
-      class: false,
       min: 768,
       max: 991
     },
     lg: {
-      class: false,
       min: 992,
       max: 1199
     },
     xl: {
-      class: false,
       min: 1200,
       max: Infinity
     }
@@ -65,22 +60,18 @@
     // For Bootstrap 3
   };var bootstrap3Breakpoints = {
     xs: {
-      class: false,
       min: -1,
       max: 767
     },
     sm: {
-      class: false,
       min: 768,
       max: 991
     },
     md: {
-      class: false,
       min: 992,
       max: 1199
     },
     lg: {
-      class: false,
       min: 1200,
       max: Infinity
     }
@@ -116,7 +107,8 @@
     _rPermissions: {
       bs4: bootstrap4Breakpoints,
       bs3: bootstrap3Breakpoints
-    }
+    },
+    allProperties: {} // id: {lastBp:'', pointsName: '', dataset: {}}
   };
 
   var vueResponsive = {
@@ -125,6 +117,7 @@
       console.log(isShort);
       // Bootstrap 4 Repsonsive Utils default
       var componentHasDefault = !!self._rPermissions.default;
+      var useClass = !!binding.modifiers.class;
       if (!self.init) {
         for (var i in vnode.context.$data) {
           if (i.indexOf('responsiveMarks$$') === 0) {
@@ -142,8 +135,11 @@
         self.init++;
       }
       var validInputs = ['hidden-all'];
+      var validPositiv = [];
+      var choosenBPointsName = componentHasDefault ? self._rPermissions.defaultName : binding.arg || 'bs4';
       for (var _key in self._rPermissions[binding.arg]) {
         validInputs.push(_key);
+        validPositiv.push(_key);
         validInputs.push('hidden-' + _key);
       }
 
@@ -168,11 +164,14 @@
       // need a case for the short syntax
       // are the modifiers decisive?
       var modifiers = (0, _keys2.default)(binding.modifiers);
-      if (modifiers.some(function (k) {
-        return ~validInputs.indexOf(k);
+      if (useClass) ;else if (modifiers.some(function (k) {
+        return ~validPositiv.indexOf(k.replace(/\+|-/g, ''));
       })) {
         var _preParams;
 
+        modifiers.forEach(function (m) {
+          // if (/^(\+|-)|(\+|-)$/g.test(modifiers))
+        });
         (_preParams = preParams).push.apply(_preParams, (0, _toConsumableArray3.default)(modifiers));
         preParams.push('hidden-all');
         preParams.sort();
@@ -197,7 +196,11 @@
         return; // no parameter given, no work :/
       }
       // init the permission object with an id
-      var rPermissions = { rId: String(self.idIncrement++) };
+      var rId = String(self.idIncrement++);
+
+      // save the settings for this element in it's dataset
+      el.dataset.responsives = rId;
+      var rPermissions = { lastBp: '', bpSet: choosenBPointsName, useClass: useClass };
 
       var hiddenAllIndex = preParams.indexOf('hidden-all');
       if (~hiddenAllIndex) {
@@ -225,8 +228,7 @@
         }
       }
 
-      // save the settings for this element in it's dataset
-      el.dataset.responsives = window.JSON.stringify(rPermissions);
+      self.allProperties[rId] = rPermissions;
     },
 
     /**
@@ -238,25 +240,34 @@
      */
     inserted: function inserted(el, binding, vnode) {
       if (el.dataset.responsives == null) return;
+      // todo: throw error if isNaN
+      var resizeListenerId = el.dataset.responsives;
 
       /**
        * This function checks the current breakpoint constraints for this element
        */
       function checkDisplay() {
-        var myPermissions = JSON.parse(el.dataset.responsives);
+        var myPermissions = self.allProperties[resizeListenerId]; // JSON.parse(el.dataset.responsives)
         var curWidth = window.innerWidth;
         var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : '';
         var parameters = self._rPermissions[binding.arg];
         for (var i in parameters) {
           if (curWidth >= parameters[i].min && curWidth <= parameters[i].max) {
-            el.style.display = myPermissions[i] ? initial : 'none';
+            if (myPermissions.lastBp !== i) {
+              if (self.allProperties[resizeListenerId].useClass) {
+                el.classList.add(myPermissions.bpSet + '-' + i);
+                el.classList.remove(myPermissions.bpSet + '-' + myPermissions.lastBp);
+              } else {
+                el.style.display = myPermissions[i] ? initial : 'none';
+              }
+
+              self.allProperties[resizeListenerId].lastBp = i;
+            }
             break;
           }
         }
       }
       checkDisplay();
-
-      var resizeListenerId = JSON.parse(el.dataset.responsives).rId;
       self.resizeListeners[resizeListenerId] = checkDisplay;
     },
 
@@ -268,7 +279,7 @@
      * @param  {object} vnode   the virtual html elment
      */
     unbind: function unbind(el, binding, vnode) {
-      var resizeListenerId = JSON.parse(el.dataset.responsives).rId;
+      var resizeListenerId = el.dataset.responsives;
       delete self.resizeListeners[resizeListenerId];
     }
 

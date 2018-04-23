@@ -27,7 +27,7 @@ Of course the parameters can be combined. For instance:
 
 ```javascript
 
-<p v-responsiveness ="['hidden-xs', 'hidden-sm',  'hidden-md', 'hidden-lg']">
+<p v-responsiveness ="['hidden-sm',  'hidden-md', 'hidden-lg', 'hidden-xl']">
   Text for extra small
 </p>
     

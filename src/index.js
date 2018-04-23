@@ -1,27 +1,22 @@
 // For Bootstrap 4
 const bootstrap4Breakpoints = {
   xs: {
-    class: false,
     min: -1,
     max: 543
   },
   sm: {
-    class: false,
     min: 544,
     max: 767
   },
   md: {
-    class: false,
     min: 768,
     max: 991
   },
   lg: {
-    class: false,
     min: 992,
     max: 1199
   },
   xl: {
-    class: false,
     min: 1200,
     max: Infinity
   }
@@ -30,22 +25,18 @@ const bootstrap4Breakpoints = {
 // For Bootstrap 3
 const bootstrap3Breakpoints = {
   xs: {
-    class: false,
     min: -1,
     max: 767
   },
   sm: {
-    class: false,
     min: 768,
     max: 991
   },
   md: {
-    class: false,
     min: 992,
     max: 1199
   },
   lg: {
-    class: false,
     min: 1200,
     max: Infinity
   }
@@ -78,7 +69,8 @@ const self = {
   _rPermissions: {
     bs4: bootstrap4Breakpoints,
     bs3: bootstrap3Breakpoints
-  }
+  },
+  allProperties: {} // id: {lastBp:'', pointsName: '', dataset: {}}
 }
 
 var vueResponsive = {
@@ -87,6 +79,7 @@ var vueResponsive = {
     console.log(isShort)
     // Bootstrap 4 Repsonsive Utils default
     var componentHasDefault = !!self._rPermissions.default
+    let useClass = !!binding.modifiers.class
     if (!self.init) {
       for (let i in vnode.context.$data) {
         if (i.indexOf('responsiveMarks$$') === 0) {
@@ -102,8 +95,11 @@ var vueResponsive = {
       self.init++
     }
     var validInputs = ['hidden-all']
+    let validPositiv = []
+    let choosenBPointsName = componentHasDefault ? self._rPermissions.defaultName : (binding.arg || 'bs4')
     for (let key in self._rPermissions[binding.arg]) {
       validInputs.push(key)
+      validPositiv.push(key)
       validInputs.push(`hidden-${key}`)
     }
 
@@ -126,7 +122,11 @@ var vueResponsive = {
     // need a case for the short syntax
     // are the modifiers decisive?
     let modifiers = Object.keys(binding.modifiers)
-    if (modifiers.some(k => ~validInputs.indexOf(k))) {
+    if (useClass);
+    else if (modifiers.some(k => ~validPositiv.indexOf(k.replace(/\+|-/g, '')))) {
+      modifiers.forEach(m => {
+        // if (/^(\+|-)|(\+|-)$/g.test(modifiers))
+      })
       preParams.push(...modifiers)
       preParams.push('hidden-all')
       preParams.sort()
@@ -150,7 +150,11 @@ var vueResponsive = {
       return // no parameter given, no work :/
     }
     // init the permission object with an id
-    var rPermissions = { rId: String(self.idIncrement++) }
+    let rId = String(self.idIncrement++)
+
+    // save the settings for this element in it's dataset
+    el.dataset.responsives = rId
+    var rPermissions = { lastBp: '', bpSet: choosenBPointsName, useClass }
 
     let hiddenAllIndex = preParams.indexOf('hidden-all')
     if (~hiddenAllIndex) {
@@ -173,8 +177,7 @@ var vueResponsive = {
       }
     }
 
-    // save the settings for this element in it's dataset
-    el.dataset.responsives = window.JSON.stringify(rPermissions)
+    self.allProperties[rId] = rPermissions
   },
 
   /**
@@ -186,25 +189,34 @@ var vueResponsive = {
    */
   inserted: function (el, binding, vnode) {
     if (el.dataset.responsives == null) return
+    // todo: throw error if isNaN
+    let resizeListenerId = el.dataset.responsives
 
     /**
      * This function checks the current breakpoint constraints for this element
      */
     function checkDisplay () {
-      var myPermissions = JSON.parse(el.dataset.responsives)
+      var myPermissions = self.allProperties[resizeListenerId] // JSON.parse(el.dataset.responsives)
       var curWidth = window.innerWidth
       var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : ''
       var parameters = self._rPermissions[binding.arg]
       for (let i in parameters) {
         if (curWidth >= parameters[i].min && curWidth <= parameters[i].max) {
-          el.style.display = myPermissions[i] ? initial : 'none'
+          if (myPermissions.lastBp !== i) {
+            if (self.allProperties[resizeListenerId].useClass) {
+              el.classList.add(myPermissions.bpSet + '-' + i)
+              el.classList.remove(myPermissions.bpSet + '-' + myPermissions.lastBp)
+            } else {
+              el.style.display = myPermissions[i] ? initial : 'none'
+            }
+
+            self.allProperties[resizeListenerId].lastBp = i
+          }
           break
         }
       }
     }
     checkDisplay()
-
-    var resizeListenerId = JSON.parse(el.dataset.responsives).rId
     self.resizeListeners[resizeListenerId] = checkDisplay
   },
 
@@ -216,7 +228,7 @@ var vueResponsive = {
    * @param  {object} vnode   the virtual html elment
    */
   unbind: function (el, binding, vnode) {
-    var resizeListenerId = JSON.parse(el.dataset.responsives).rId
+    let resizeListenerId = el.dataset.responsives
     delete self.resizeListeners[resizeListenerId]
   }
 }

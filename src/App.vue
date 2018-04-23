@@ -1,23 +1,21 @@
 <template>
   <div id="app">
     <routes></routes>
-    <HelloWorld/>
+
     <top-info></top-info>
     <footer>
-      Github
+      This is a demonstration site for the Open-Source plugin <a href="https://github.com/reinerBa/Vue-Responsive">vue-responsive</a> hosted at Github.com
     </footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
 import Routes from './components/Routes'
 import TopInfo from './components/TopInfo'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     Routes,
     TopInfo
   }
@@ -25,6 +23,14 @@ export default {
 </script>
 
 <style>
+footer {
+  position: fixed;
+  bottom: 0;
+  padding: 2px;
+  width: 100%;
+  text-align: center;
+  background-color: antiquewhite;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -33,6 +39,8 @@ export default {
   color: #2c3e50;
 }
 body {
+  margin-bottom: 1em;
+  background-color: ghostwhite;
   margin-top: 0;
   text-align: center;
   font-family:'Segoe UI','Franklin Gothic Medium', Arial

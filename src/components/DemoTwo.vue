@@ -1,8 +1,8 @@
 <template>
   <div class="demoTwo">
     <div>
-        <p v-responsive="'hidden-xs'">*I am hidden on extra small device screens*</p>
-        <p v-responsive="['hidden-sm']">*I am hidden on small device screens*</p>
+        <p v-responsive="'hidden-xs'">I am hidden on extra small device screens</p>
+        <p v-responsive="['hidden-sm', 'hidden-xs']">I am hidden on small device screens</p>
         <p v-responsive="respObj">This elements visibility is controlled by an object</p>
     </div>
     <pre class="language-html"><code v-text="codeHtml"></code></pre>
@@ -16,12 +16,12 @@ export default {
   name: 'DemoTwo',
   data () {
     return {
-      respObj: { 'xs': false, 'hidden-xs': true, 'hidden-xl': true },
-      codeHtml: `<p v-responsive="'hidden-xs'">*I am hidden on extra small device screens*</p>
-<p v-responsive="['hidden-sm']">*I am hidden on small device screens*</p>
-<span v-responsive="respObj">#This elements visibility is controlled by an object</span>`,
+      respObj: { 'hidden-md': true, 'hidden-lg': true, 'hidden-xl': true },
+      codeHtml: `<p v-responsive="'hidden-xs'">I am hidden on extra small device screens</p>
+<p v-responsive="['hidden-sm', 'hidden-xs']">I am hidden on small device screens</p>
+<span v-responsive="respObj">This elements visibility is controlled by an object</span>`,
       codeJs: `data () { return {
-  respObj: { "xs": false, "hidden-xs": true, "hidden-xl": true },
+  respObj: { "hidden-md": true, "hidden-lg": true, "hidden-xl": true },
 `
     }
   }
@@ -38,5 +38,9 @@ p {
 }
 code {
   text-align: left;
+}
+.demoTwo {
+  max-width: 850px;
+  margin: 0 auto;
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
   <div class="demoFour">
+    <p>
+      Just use <strong>v-responsive</strong> + <strong>[xs, sm, md, lg, xl]</strong> to make elements visible on specific breakpoints and hide them on all others.
+    </p>
     <pre v-responsive.lg.xl class="language-html"><code v-text="panels[0]"></code></pre>
     <pre v-responsive.md class="language-html"><code v-text="panels[1]"></code></pre>
     <pre v-responsive.sm.xs class="language-html"><code v-text="panels[2]"></code></pre>
@@ -14,16 +17,16 @@ export default {
     return {
       panels: [
         `<span v-responsive.lg.xl>
-  large and extra-large
+  1. large and extra-large
 </span>`,
         `<span v-responsive.md>
-  medium
+  2. medium
 </span>`,
         `<span v-responsive.sm.xs>
-  small and extra-small
+  3. small and extra-small
 </span>`,
         `<span v-responsive.lg.md.sm>
-  large + medium + small
+  4. large + medium + small
 </span>`
       ]
     }
