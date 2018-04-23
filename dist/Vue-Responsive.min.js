@@ -1,4 +1,4 @@
-/*! Vue-Responsive v1.0.0
+/*! Vue-Responsive v1.0.1
 * @Url: https://github.com/reinerBa/Vue-Responsive
 * @License: MIT, Reiner Bamberger
 */
