@@ -25,7 +25,7 @@ Is a directive to use responsive breakpoints on html elements. Because sometimes
 - **🔧 Chrome, Firefox, IE11+**
 
 
-📺 Check the [Demo-link](https://reinerba.github.io/Vue-Responsive/Demo.html)
+📺 Check the [Demo-link](https://reinerba.github.io/Vue-Responsive/dist/)
 
 📖 [Docs](https://reinerba.github.io/Vue-Responsive/Documentation/)
 

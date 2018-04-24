@@ -121,7 +121,7 @@ var vueResponsive = {
 
     // need a case for the short syntax
     // are the modifiers decisive?
-    let modifiers = Object.keys(binding.modifiers)
+    let modifiers = window.Object.keys(binding.modifiers)
     if (useClass);
     else if (modifiers.some(k => ~validPositiv.indexOf(k.replace(/\+|-/g, '')))) {
       modifiers.forEach(m => {

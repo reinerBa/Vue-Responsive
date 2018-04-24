@@ -4,17 +4,17 @@
 */
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'babel-runtime/helpers/typeof', 'babel-runtime/helpers/toConsumableArray', 'babel-runtime/core-js/object/keys'], factory);
+    define(['exports', 'babel-runtime/helpers/typeof', 'babel-runtime/helpers/toConsumableArray'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('babel-runtime/helpers/typeof'), require('babel-runtime/helpers/toConsumableArray'), require('babel-runtime/core-js/object/keys'));
+    factory(exports, require('babel-runtime/helpers/typeof'), require('babel-runtime/helpers/toConsumableArray'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global._typeof, global.toConsumableArray, global.keys);
+    factory(mod.exports, global._typeof, global.toConsumableArray);
     global.index = mod.exports;
   }
-})(this, function (exports, _typeof2, _toConsumableArray2, _keys) {
+})(this, function (exports, _typeof2, _toConsumableArray2) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -25,8 +25,6 @@
   var _typeof3 = _interopRequireDefault(_typeof2);
 
   var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-  var _keys2 = _interopRequireDefault(_keys);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -163,7 +161,7 @@
 
       // need a case for the short syntax
       // are the modifiers decisive?
-      var modifiers = (0, _keys2.default)(binding.modifiers);
+      var modifiers = window.Object.keys(binding.modifiers);
       if (useClass) ;else if (modifiers.some(function (k) {
         return ~validPositiv.indexOf(k.replace(/\+|-/g, ''));
       })) {
