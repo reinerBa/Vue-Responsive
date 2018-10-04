@@ -1,4 +1,4 @@
-/*! Vue-Responsive v1.0.1
+/*! Vue-Responsive v1.0.2
 * @Url: https://github.com/reinerBa/Vue-Responsive
 * @License: MIT, Reiner Bamberger
 */
@@ -75,29 +75,6 @@
     }
   };
 
-  function shortIntoBreakpoint(str, rValue) {
-    // is positive ?
-    var numValue = Number(str);
-    if (numValue > 0) rValue.min = numValue;else rValue.max = -numValue;
-  }
-
-  function isShortSyntax(binding) {
-    var isShort = typeof binding.value === 'number' || typeof binding.expression === 'string' && (binding.expression.indexOf('+') === 0 || binding.expression.indexOf('-') === 0 || !isNaN(binding.expression[0]));
-
-    if (!isShort) return false;
-    var rValue = {};
-    if (~binding.expression.indexOf('&&')) {
-      // is range?
-      binding.expression.split('&&').map(function (e) {
-        return e.trim();
-      }).forEach(function (e) {
-        return shortIntoBreakpoint(e, rValue);
-      });
-    } else {
-      shortIntoBreakpoint(binding.expression.trim(), rValue);
-    }
-    return rValue;
-  }
   var self = {
     idIncrement: 1,
     resizeListeners: null,
@@ -111,8 +88,6 @@
 
   var vueResponsive = {
     bind: function bind(el, binding, vnode) {
-      var isShort = isShortSyntax(binding);
-      console.log(isShort);
       // Bootstrap 4 Repsonsive Utils default
       var componentHasDefault = !!self._rPermissions.default;
       var useClass = !!binding.modifiers.class;

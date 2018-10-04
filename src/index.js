@@ -42,26 +42,6 @@ const bootstrap3Breakpoints = {
   }
 }
 
-function shortIntoBreakpoint (str, rValue) {
-  // is positive ?
-  let numValue = Number(str)
-  if (numValue > 0) rValue.min = numValue
-  else rValue.max = -numValue
-}
-
-function isShortSyntax (binding) {
-  var isShort = typeof (binding.value) === 'number' || (typeof (binding.expression) === 'string' &&
-    (binding.expression.indexOf('+') === 0 || binding.expression.indexOf('-') === 0 || !isNaN(binding.expression[0])))
-
-  if (!isShort) return false
-  var rValue = {}
-  if (~binding.expression.indexOf('&&')) { // is range?
-    binding.expression.split('&&').map(e => e.trim()).forEach(e => shortIntoBreakpoint(e, rValue))
-  } else {
-    shortIntoBreakpoint(binding.expression.trim(), rValue)
-  }
-  return rValue
-}
 const self = {
   idIncrement: 1,
   resizeListeners: null,
@@ -75,8 +55,6 @@ const self = {
 
 var vueResponsive = {
   bind: function (el, binding, vnode) {
-    var isShort = isShortSyntax(binding)
-    console.log(isShort)
     // Bootstrap 4 Repsonsive Utils default
     var componentHasDefault = !!self._rPermissions.default
     let useClass = !!binding.modifiers.class
