@@ -18,3 +18,4 @@ src/
 *.tgz
 dist/static/
 dist/index.html
+Documentation/logo.png
