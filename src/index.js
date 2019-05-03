@@ -78,7 +78,7 @@ var vueResponsive = {
     for (let key in self._rPermissions[binding.arg]) {
       validInputs.push(key)
       validPositiv.push(key)
-      validInputs.push(`hidden-${key}`)
+      validInputs.push("hidden-"+key)
     }
 
     // if this is the first element with this directive that gets bound add the resize listener
