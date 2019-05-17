@@ -25,7 +25,7 @@ Is a directive to use responsive breakpoints on html elements. Because sometimes
 - **🔧 Chrome, Firefox, IE11+**
 
 
-📺 Check the [Demo-link](https://reinerba.github.io/Vue-Responsive/dist/)
+📺 Check the [Demo-link](https://reinerba.github.io/Vue-Responsive/dist/) (which does not work in IE because of webpack)
 
 📖 [Docs](https://reinerba.github.io/Vue-Responsive/Documentation/)
 
@@ -34,8 +34,8 @@ Is a directive to use responsive breakpoints on html elements. Because sometimes
 
 ```javascript
 
-import responsive from ('vue-responsive')
-Vue.use(responsive)`
+import responsive from 'vue-responsive'
+Vue.use(responsive)
 ```
 
 ## 👈 Shortest usecase
