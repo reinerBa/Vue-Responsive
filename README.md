@@ -102,7 +102,7 @@ In the browser just include the script and use the directive on a Html-Element i
 
     <script src="Vue-Responsive.min.js" notGlobal="true" ></script>	
 	...
-	direcitves:{
+	directives:{
 		// the global variable is 'index.vueResponsive'
 		responsive: index.vueResponsive
 	}
