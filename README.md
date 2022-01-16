@@ -84,11 +84,6 @@ The default Responsive breaks follow Bootstrap 4 [Responsive Utils](https://v4-a
 
 The Bootstrap 3 breakpoints are includes as well.
 
-## Do you miss a feature?
-Take charge and file an issue or [add your idea](http://feathub.com/reinerBa/Vue-Responsive/features/new) or [vote for your favorite feature](http://feathub.com/reinerBa/Vue-Responsive) to be implemented:
-
-[![Feature Requests](http://feathub.com/reinerBa/Vue-Responsive?format=svg)](http://feathub.com/reinerBa/Vue-Responsive)
-
 # Usage
 
 In the browser just include the script and use the directive on a Html-Element inside a Vue Element

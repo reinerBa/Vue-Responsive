@@ -9,7 +9,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from "@vue/runtime-core"
+
+export default defineComponent({
   name: 'DemoFive',
   data () {
     return {
@@ -30,7 +32,7 @@ export default {
 </span>`
     }
   }
-}
+})
 </script>
 
 <style scoped>

@@ -1,24 +1,26 @@
 <template>
   <div class="routes">
     <div class="header">
-    <span v-if="!r.hide" v-for="(r, idx) in routes" :key="idx">
+    <span v-show="!r.hide" v-for="(r, idx) in routes" :key="idx">
       <label :for="'route'+idx" :class="{marked: marked === r.component}">{{r.title}}</label>
       <input v-model="marked" :id="'route'+idx" :value="r.component" name="route" type="radio"/>
     </span>
   </div>
   <div>
+    <router-view />
     <component :is="marked"></component>
   </div>
   </div>
 </template>
 
-<script>
-import DemoOne from './DemoOne'
-import DemoTwo from './DemoTwo'
-import DemoThree from './DemoThree'
-import DemoFour from './DemoFour'
+<script lang="ts">
+import DemoOne from './Overview.vue'
+import DemoTwo from './Formats-Demo.vue'
+import DemoThree from './BS3-Demo.vue'
+import DemoFour from './Token-Demo.vue'
 import DemoFive from './DemoFive'
-import DemoSix from './DemoSix'
+import DemoSix from './Classes-Demo.vue'
+import {routes} from './../router'
 
 export default {
   name: 'Routes',
@@ -46,7 +48,7 @@ export default {
         {
           component: 'demoFive',
           title: 'Numbers',
-          hide: true
+          hide: 0
         },
         {
           component: 'demoSix',

@@ -16,7 +16,7 @@
       <tr><th>v-responsive=</th><th>XS</th><th>SM</th><th>MD</th><th>LG</th><th>XL</th></tr>
       <tr><td>['hidden-all', 'xs', 'xl']</td><td>.</td><td></td><td></td><td></td><td>.</td></tr>
       <tr><td>['hidden-xs']</td><td></td><td>.</td><td>.</td><td>.</td><td>.</td></tr>
-      <tr><td>['hidden-xs', 'hidden-sm']</td><td><td><td>.</td><td>.</td><td>.</td></tr>
+      <tr><td>['hidden-xs', 'hidden-sm']</td><td></td><td>.</td><td>.</td><td>.</td></tr>
       <tr><td>['hidden-all', 'lg', 'xl']</td><td></td><td></td><td></td><td>.</td><td>.</td></tr>
       <tr><td>['hidden-all', 'xl']</td><td></td><td></td><td></td><td></td><td>.</td></tr>
       <tr><td>['hidden-all', 'xs', 'md', 'xl']</td><td>.</td><td></td><td>.</td><td></td><td>.</td></tr>
