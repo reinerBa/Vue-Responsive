@@ -1,6 +1,6 @@
 {
   "name": "vue-responsive",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A plugin for responsive design without media querys for Vue.js 2.x",
   "main": "src/index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js",
     "dist": "node build/babel.release.js",
-    "prepublishOnly": "npm run dist"
+    "prepublishOnly": "npm run dist",
+	"build:types": "tsc src/index.js -d --declarationDir src/ --declarationMap --emitDeclarationOnly --allowJs"
   },
   "repository": {
     "type": "git",
@@ -72,6 +73,7 @@
     "rimraf": "^2.7.1",
     "semver": "^5.7.1",
     "shelljs": "^0.8.5",
+    "typescript": "^4.5.4",
     "uglify-js": "^3.14.5",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.1",
