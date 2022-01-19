@@ -1,5 +1,7 @@
+import { Directive, DirectiveBinding, VNode, VueElement } from "vue"
+
 // For Bootstrap 4
-const bootstrap4Breakpoints = {
+const bootstrap4Breakpoints: breakpointSet = {
   xs: {
     min: -1,
     max: 543
@@ -23,7 +25,7 @@ const bootstrap4Breakpoints = {
 }
 
 // For Bootstrap 3
-const bootstrap3Breakpoints = {
+const bootstrap3Breakpoints: breakpointSet = {
   xs: {
     min: -1,
     max: 767
@@ -42,36 +44,78 @@ const bootstrap3Breakpoints = {
   }
 }
 
-const self = {
+export interface breakpointRange {
+  min: number
+  max: number
+}
+export interface breakpointSet {
+  xs?: breakpointRange
+  sm?: breakpointRange
+  md?: breakpointRange
+  lg?: breakpointRange
+  xl?: breakpointRange
+  xxl?: breakpointRange
+  [key: string]: breakpointRange | undefined
+}
+export interface vueResponsiveOptions {
+  breakpoints: breakpointSet
+}
+
+interface bpList {
+  default: Object | null
+  bs4: Object
+  bs3: Object
+}
+interface options extends vueResponsiveOptions {
+  idIncrement: number
+  resizeListeners: Array<ResizeListener>
+  init: boolean
+  _rPermissions: bpList
+  allProperties: object
+}
+interface ResizeListener {
+  id: string
+  checkDisplay: Function
+}
+
+const self: options = {
+  breakpoints: {},
   idIncrement: 1,
-  resizeListeners: null,
+  resizeListeners: [],
   init: false,
   _rPermissions: {
     bs4: bootstrap4Breakpoints,
-    bs3: bootstrap3Breakpoints
+    bs3: bootstrap3Breakpoints,
+    default: null
   },
   allProperties: {} // id: {lastBp:'', pointsName: '', dataset: {}}
 }
 
-var vueResponsive = {
-  bind: function (el, binding, vnode) {
-    // Bootstrap 4 Repsonsive Utils default
-    var componentHasDefault = !!self._rPermissions.default
-    let useClass = !!binding.modifiers.class
+var vueResponsive : Directive = {
+  created(el: VueElement, binding: DirectiveBinding, vNode: VNode) {
+
     if (!self.init) {
-      for (let i in vnode.context.$data) {
+      // Bootstrap 4 Repsonsive Utils default
+      var componentHasDefault = !!self._rPermissions.default      // @deprecated feature! Insert with create function
+/*      for (let i in vNode.context.$data) {  
         if (i.indexOf('responsiveMarks$$') === 0) {
           var name = String(i).replace('responsiveMarks$$', '').toLowerCase()
           self._rPermissions[name] = {}
 
-          for (let ii in vnode.context.$data[i]) self._rPermissions[name][ii] = vnode.context.$data[i][ii]
+          for (let ii in vNode.context.$data[i]) self._rPermissions[name][ii] = vNode.context.$data[i][ii]
         }
-        if (i === 'responsiveDefault$$') componentHasDefault = vnode.context.$data[i]
-      }
+        if (i === 'responsiveDefault$$') componentHasDefault = vNode.context.$data[i]
+      } */
       // Set bs4 as default if not default is explicitly set
       self._rPermissions.undefined = componentHasDefault ? self._rPermissions[componentHasDefault] : self._rPermissions.bs4
-      self.init++
+      self.init = true
     }
+  },
+  beforeMount (el: VueElement, binding: DirectiveBinding, vNode: VNode) {
+
+    let useClass = !!binding.modifiers.class
+
+    var componentHasDefault = !!self._rPermissions.default      // @deprecated feature! Insert with create function
     var validInputs = ['hidden-all']
     let validPositiv = []
     let choosenBPointsName = componentHasDefault ? self._rPermissions.defaultName : (binding.arg || 'bs4')
@@ -82,15 +126,16 @@ var vueResponsive = {
     }
 
     // if this is the first element with this directive that gets bound add the resize listener
-    if (!self.resizeListeners) {
-      self.resizeListeners = {}
+    //if (!self.resizeListeners) {
+      //self.resizeListeners = {}
 
       // adds a single resize listener for all elements
-      window.addEventListener('resize', function () {
+      window.addEventListener('resize', () => {
         // calls the checkDisplay function for all elements that are active in the DOM and use this directive
-        for (let i in self.resizeListeners) if (!isNaN(i)) self.resizeListeners[i]()
+        self.resizeListeners.forEach((rl: ResizeListener) => rl.checkDisplay())
+//        for (let i in self.resizeListeners) if (!isNaN(i)) self.resizeListeners[i]()
       })
-    }
+    
 
     // if the element has a user defined css-value, save it!
     if (el.style.display) el.dataset.initialDisplay = el.style.display ? el.style.display : getComputedStyle(el, null).display
@@ -100,7 +145,7 @@ var vueResponsive = {
     // need a case for the short syntax
     // are the modifiers decisive?
     let modifiers = window.Object.keys(binding.modifiers)
-    if (useClass);
+    if (useClass){}
     else if (modifiers.some(k => ~validPositiv.indexOf(k.replace(/\+|-/g, '')))) {
       modifiers.forEach(m => {
         // if (/^(\+|-)|(\+|-)$/g.test(modifiers))
@@ -165,7 +210,7 @@ var vueResponsive = {
    * @param  {object} binding the parameters of the mixin
    * @param  {object} vnode   the virtual html elment
    */
-  inserted: function (el, binding, vnode) {
+   mounted (el: VueElement, binding: DirectiveBinding, vNode: VNode) {
     if (el.dataset.responsives == null) return
     // todo: throw error if isNaN
     let resizeListenerId = el.dataset.responsives
@@ -195,7 +240,8 @@ var vueResponsive = {
       }
     }
     checkDisplay()
-    self.resizeListeners[resizeListenerId] = checkDisplay
+    self.resizeListeners.push({id: resizeListenerId, checkDisplay})
+//    self.resizeListeners[resizeListenerId] = checkDisplay
   },
 
   /**
@@ -205,9 +251,11 @@ var vueResponsive = {
    * @param  {object} binding the parameters of the mixin
    * @param  {object} vnode   the virtual html elment
    */
-  unbind: function (el, binding, vnode) {
+   unmounted (el: VueElement, binding: DirectiveBinding, vNode: VNode) {
     let resizeListenerId = el.dataset.responsives
-    delete self.resizeListeners[resizeListenerId]
+    let idx = self.resizeListeners.findIndex(rl => rl.id === resizeListenerId)
+    self.resizeListeners.splice(idx, 1)
+    //delete self.resizeListeners[resizeListenerId]
   }
 }
 
@@ -217,32 +265,19 @@ var vueResponsive = {
  * @param  {object} Vue     the constructor of the framework
  * @param  {object} options parameter to modify the behavior of the plugin
  * @return {void}         returns nothing
- */
+ *
 vueResponsive.install = function (Vue, options) {
-  if( !Vue.version.startsWith("2.")) {
-    throw Error(`vue-responsive: To use the directive with vue3 please import from 'vue-responsive/vue3' 
-    with '/vue3' after package name! 
-    This module is for vue 2`)
-  } 
-
   if (typeof (options) === 'object' && options.breakpoints) {
     self._rPermissions.default = options.breakpoints
   }
   Vue.directive('responsive', vueResponsive)
-}
+}*/
 
 // https://babeljs.io/docs/plugins/transform-es2015-modules-umd/
 export {vueResponsive}
 export default vueResponsive
 
-// Check if the directive should be used globally
-try {
-  var notGlobal = false
-  var currScriptFn = document.currentScript
-  currScriptFn = currScriptFn || (function () {
-    var scripts = document.getElementsByTagName('script')
-    return scripts[scripts.length - 1]
-  })()
-  notGlobal = Boolean(currScriptFn.getAttribute('notGlobal'))
-  if (!notGlobal && typeof window !== 'undefined' && typeof window.Vue === 'function') window.Vue.use(vueResponsive)
-} catch (idk) { console.error(idk) }
+export function fromSettings (settings: vueResponsiveOptions) : Directive{
+  self._rPermissions.default = settings.breakpoints
+  return vueResponsive
+}

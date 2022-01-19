@@ -13,7 +13,8 @@ test/
 .editorconfig
 src/assets/
 build/
-src/
+src/components/
+*.vue
 !src/index.js
 *.tgz
 dist/static/
