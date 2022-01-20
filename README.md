@@ -15,14 +15,20 @@
 
 [![NPM](https://nodei.co/npm/vue-responsive.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-responsive/)
 
+Vue-Responsive is a plugin to use responsive breakpoints easy on html elements. Because sometimes it's nice to to let vue do resolution specific things. It uses the breakpoints from bootstrap 4 as default.
+
 📺 Check the [Demo](https://reinerba.github.io/Vue-Responsive/dist/)-link (IE11-[Demo](http://reinerba.github.io/Vue-Responsive/Demo.html) without webpack)
 
-## 🔧  Install
+## 🔧  How to use
 
-From npm: `npm install vue-responsive`
+Load: 
+```javascript
+
+npm install vue-responsive
+```
 
 <details>
-<summary>For vue2</summary>
+<summary>**With vue2** (click to open)</summary>
 
 ```javascript
 
@@ -49,7 +55,7 @@ In the browser just include the script and use the directive on a Html-Element i
 </details> 
 
 <details>
-<summary>For vue3</summary>
+<summary>**With vue3** (click to open)</summary>
 
 ```javascript
 
@@ -59,16 +65,6 @@ const app = createApp(App)
 app.directive('responsive', responsive)
 ```
 </details>
-
-**Breaking Changes for verison 1.x:** 
-
-- **Tag is now `v-responsive` the old `v-responsiveness` is no longer supported.**
-- **The file `Vue_Responsive.common.js` does no longer exist** 
-
-Is a directive to use responsive breakpoints on html elements. Because sometimes it's nice to have a chance to let the view do resolution specific things.
-
-- **No further Dependencies** 
-- **🔧 Chrome, Firefox, IE11+**
 
 
 📖 [Docs](https://reinerba.github.io/Vue-Responsive/Documentation/)
@@ -185,6 +181,14 @@ First you have to declar your own breakpoints in the component/root wich wraps t
 
 You can declar as much own definitions as you wish. Every defintion should have **min:-1** for its smalles breakpoint and **max:Infinity** for its biggest.
 
+**Breaking Changes for verison 1.x:** 
+
+- **Tag is now `v-responsive` the old `v-responsiveness` is no longer supported.**
+- **The file `Vue_Responsive.common.js` does no longer exist** 
+
+
+- **No further Dependencies** 
+- **🔧 Chrome, Firefox, IE11+**
 
 ### Planned 
   - Mixin to trigger methods on breakpoint change
