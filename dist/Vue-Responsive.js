@@ -231,7 +231,7 @@
                 el.classList.add(myPermissions.bpSet + '-' + i);
                 el.classList.remove(myPermissions.bpSet + '-' + myPermissions.lastBp);
               } else {
-                el.style.display = myPermissions[i] ? initial : 'none';
+                el.style.display = myPermissions[i] ? initial : 'none !important';
               }
 
               self.allProperties[resizeListenerId].lastBp = i;
@@ -264,6 +264,10 @@
      * @return {void}         returns nothing
      */
   };vueResponsive.install = function (Vue, options) {
+    if (!Vue.version.startsWith("2.")) {
+      throw Error('vue-responsive: To use the directive with vue3 please import from \'vue-responsive/vue3\' \n    with \'/vue3\' after package name! \n    This module is for vue 2');
+    }
+
     if ((typeof options === 'undefined' ? 'undefined' : (0, _typeof3.default)(options)) === 'object' && options.breakpoints) {
       self._rPermissions.default = options.breakpoints;
     }

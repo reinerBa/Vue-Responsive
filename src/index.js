@@ -185,7 +185,7 @@ var vueResponsive = {
               el.classList.add(myPermissions.bpSet + '-' + i)
               el.classList.remove(myPermissions.bpSet + '-' + myPermissions.lastBp)
             } else {
-              el.style.display = myPermissions[i] ? initial : 'none'
+              el.style.display = myPermissions[i] ? initial : 'none !important'
             }
 
             self.allProperties[resizeListenerId].lastBp = i

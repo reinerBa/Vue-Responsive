@@ -4,15 +4,61 @@
 
 # Vue-Responsive
 
-<a href="https://standardjs.com" style="float: right; padding: 0 0 20px 20px;"><img src="https://cdn.rawgit.com/feross/standard/master/sticker.svg" alt="JavaScript Standard Style" width="100" align="right"></a>
-
 [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
+[![vue3](https://img.shields.io/badge/vue-3.x-brightgreen.svg)](https://vuejs.org/)
+[![vue3](https://img.shields.io/badge/typescript-blue.svg)](https://www.typescriptlang.org/)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-green.svg?style=flat-square)](https://github.com/feross/standard)
 [![npm](https://img.shields.io/npm/v/vue-responsive.svg)](https://www.npmjs.com/package/vue-responsive)
 [![GitHub stars](https://img.shields.io/github/stars/reinerBa/Vue-Responsive.svg)](https://github.com/reinerBa/Vue-Responsive/stargazers)
 [![license](https://img.shields.io/github/license/reinerBa/Vue-Responsive.svg)](https://github.com/reinerBa/vue-responsive/blob/master/LICENSE)
 [![Github file size](https://img.shields.io/github/size/reinerBa/Vue-Responsive/dist/Vue-Responsive.min.js.svg)](https://raw.githubusercontent.com/reinerBa/Vue-Responsive/master/dist/Vue-Responsive.min.js)
 
 [![NPM](https://nodei.co/npm/vue-responsive.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-responsive/)
+
+📺 Check the [Demo](https://reinerba.github.io/Vue-Responsive/dist/)-link (IE11-[Demo](http://reinerba.github.io/Vue-Responsive/Demo.html) without webpack)
+
+## 🔧  Install
+
+From npm: `npm install vue-responsive`
+
+<details>
+<summary>For vue2</summary>
+
+```javascript
+
+import responsive from 'vue-responsive'
+Vue.use(responsive)
+```
+
+In the browser just include the script and use the directive on a Html-Element inside a Vue Element
+
+    <script src="Vue-Responsive.min.js"></script>
+
+**Advanced:** If you do not want the directive to be globally available just add the attribute *notGlobal* with a not empty value in the script tag and define it the components with:
+
+
+```html
+
+    <script src="Vue-Responsive.min.js" notGlobal="true" ></script>	
+	...
+	directives:{
+		// the global variable is 'index.vueResponsive'
+		responsive: index.vueResponsive
+	}
+```
+</details> 
+
+<details>
+<summary>For vue3</summary>
+
+```javascript
+
+import {responsive} from 'vue-responsive/vue3'
+const app = createApp(App)
+
+app.directive('responsive', responsive)
+```
+</details>
 
 **Breaking Changes for verison 1.x:** 
 
@@ -25,20 +71,10 @@ Is a directive to use responsive breakpoints on html elements. Because sometimes
 - **🔧 Chrome, Firefox, IE11+**
 
 
-📺 Check the [Demo](https://reinerba.github.io/Vue-Responsive/dist/)-link (IE11-[Demo](http://reinerba.github.io/Vue-Responsive/Demo.html) without webpack)
-
 📖 [Docs](https://reinerba.github.io/Vue-Responsive/Documentation/)
 
-## 🔧  Install
-`npm install vue-responsive`
-
-```javascript
-
-import responsive from 'vue-responsive'
-Vue.use(responsive)
-```
-
-## 👈 Shortest usecase
+## Examples
+### 👈 Shortest usecase
 
 Just put the breakpoint identifiers behind the directive with dots:
 
@@ -51,7 +87,7 @@ Just put the breakpoint identifiers behind the directive with dots:
    <div v-responsive.sm.xs >Only visible on smartphone!</div>
 ```
 
-## 👈 Small usage example
+### 👈 Small usage example
 
 ```javascript
 
@@ -89,25 +125,6 @@ Take charge and file an issue or [add your idea](http://feathub.com/reinerBa/Vue
 
 [![Feature Requests](http://feathub.com/reinerBa/Vue-Responsive?format=svg)](http://feathub.com/reinerBa/Vue-Responsive)
 
-# Usage
-
-In the browser just include the script and use the directive on a Html-Element inside a Vue Element
-
-    <script src="Vue-Responsive.min.js"></script>
-
-**Advanced:** If you do not want the directive to be globally available just add the attribute *notGlobal* with a not empty value in the script tag and define it the components with:
-
-
-```html
-
-    <script src="Vue-Responsive.min.js" notGlobal="true" ></script>	
-	...
-	directives:{
-		// the global variable is 'index.vueResponsive'
-		responsive: index.vueResponsive
-	}
-```
-
 ## For Bootstrap 4 breakpoints
 At default every resolution is visible, the hidden-all tag changes this to everything hidden (display:none). These tags are valid **hidden-all**, **xs**, **sm**, **md**, **lg**, **xl**, **hidden-xs**,...,**hidden-xl**.
 
@@ -138,7 +155,7 @@ Just add **:bs3** after the directive to use bootstrap 3 breakpoints:
 
 In this defintion the **xl** breakpoint doesn't exist.
 
-## For self defined breakpoints 
+## For self defined breakpoints (vue2 only)
 First you have to declar your own breakpoints in the component/root wich wraps the html-elements with the directive. Every definition must start with **responsiveMarks$$** and a following name. So you can easily create breakpoints to differentiate between desktop and smartphones for instance, as you can see in the demo.html:
 	
 ```javascript
