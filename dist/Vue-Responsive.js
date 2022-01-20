@@ -1,4 +1,4 @@
-/*! Vue-Responsive v1.1.0
+/*! Vue-Responsive v1.3.0
 * @Url: https://github.com/reinerBa/Vue-Responsive
 * @License: MIT, Reiner Bamberger
 */
@@ -231,7 +231,7 @@
                 el.classList.add(myPermissions.bpSet + '-' + i);
                 el.classList.remove(myPermissions.bpSet + '-' + myPermissions.lastBp);
               } else {
-                el.style.display = myPermissions[i] ? initial : 'none';
+                el.style.display = myPermissions[i] ? initial : 'none !important';
               }
 
               self.allProperties[resizeListenerId].lastBp = i;

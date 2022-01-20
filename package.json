@@ -1,6 +1,6 @@
 {
   "name": "vue-responsive",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A plugin for responsive design without media querys for Vue.js 2.x",
   "main": "src/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "build": "node build/build.js",
     "dist": "node build/babel.release.js",
     "prepublishOnly": "npm run dist",
-	"build:types": "tsc src/index.js -d --declarationDir src/ --declarationMap --emitDeclarationOnly --allowJs"
+    "build:types": "tsc src/index.js -d --declarationDir src/ --declarationMap --emitDeclarationOnly --allowJs"
   },
   "repository": {
     "type": "git",
