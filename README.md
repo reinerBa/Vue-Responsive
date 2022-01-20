@@ -28,7 +28,7 @@ npm install vue-responsive
 ```
 
 <details>
-<summary>**With vue2** (click to open)</summary>
+<summary><strong>With vue2</strong> (click to open)</summary>
 
 ```javascript
 
@@ -55,7 +55,7 @@ In the browser just include the script and use the directive on a Html-Element i
 </details> 
 
 <details>
-<summary>**With vue3** (click to open)</summary>
+<summary><strong>With vue3</strong> (click to open)</summary>
 
 ```javascript
 
