@@ -2,6 +2,7 @@ import { Directive, DirectiveBinding, VNode, VueElement } from "vue"
 
 // For Bootstrap 4
 const bootstrap4Breakpoints: breakpointSet = {
+//  name: 'bs4',
   xs: {
     min: -1,
     max: 543
@@ -26,6 +27,7 @@ const bootstrap4Breakpoints: breakpointSet = {
 
 // For Bootstrap 3
 const bootstrap3Breakpoints: breakpointSet = {
+//  name: 'bs3',
   xs: {
     min: -1,
     max: 767
@@ -57,8 +59,13 @@ export interface breakpointSet {
   xxl?: breakpointRange
   [key: string]: breakpointRange | undefined
 }
+export interface choosenPermissions {
+  lastBp: string
+  bpSet: string
+  useClass: boolean
+}
 export interface vueResponsiveOptions {
-  breakpoints: breakpointSet
+  breakpoints: breakpointSet | Array<breakpointSet>
 }
 
 interface bpList {
@@ -66,12 +73,13 @@ interface bpList {
   bs4: Object
   bs3: Object
 }
-interface options extends vueResponsiveOptions {
+interface options {
+  breakpoints: Map<string, breakpointSet>
   idIncrement: number
   resizeListeners: Array<ResizeListener>
   init: boolean
-  _rPermissions: bpList
-  allProperties: object
+  allProperties: Map<number, choosenPermissions>
+  choosenBpSet: breakpointSet | undefined
 }
 interface ResizeListener {
   id: string
@@ -79,24 +87,34 @@ interface ResizeListener {
 }
 
 const self: options = {
-  breakpoints: {},
+  breakpoints: new Map<string, breakpointSet>(),
   idIncrement: 1,
   resizeListeners: [],
   init: false,
-  _rPermissions: {
+  choosenBpSet: undefined,
+ /* _rPermissions: {
     bs4: bootstrap4Breakpoints,
     bs3: bootstrap3Breakpoints,
-    default: null
+    default: undefined
   },
-  allProperties: {} // id: {lastBp:'', pointsName: '', dataset: {}}
+*/  allProperties: new Map<number, choosenPermissions>() // id: {lastBp:'', pointsName: '', dataset: {}}
 }
 
 var vueResponsive : Directive = {
   created(el: VueElement, binding: DirectiveBinding, vNode: VNode) {
 
     if (!self.init) {
+      self.breakpoints.set('bs3', bootstrap3Breakpoints)
+      self.breakpoints.set('bs4', bootstrap4Breakpoints)
+
+      if (!self.choosenBpSet) {
+        self.choosenBpSet = bootstrap4Breakpoints
+      }
+      if (binding.arg && self.breakpoints.has(binding.arg)) {
+        self.choosenBpSet = self.breakpoints.get(binding.arg)
+      }
       // Bootstrap 4 Repsonsive Utils default
-      var componentHasDefault = !!self._rPermissions.default      // @deprecated feature! Insert with create function
+//      var componentHasDefault: boolean = !!self._rPermissions.default      // @deprecated feature! Insert with create function
 /*      for (let i in vNode.context.$data) {  
         if (i.indexOf('responsiveMarks$$') === 0) {
           var name = String(i).replace('responsiveMarks$$', '').toLowerCase()
@@ -107,19 +125,25 @@ var vueResponsive : Directive = {
         if (i === 'responsiveDefault$$') componentHasDefault = vNode.context.$data[i]
       } */
       // Set bs4 as default if not default is explicitly set
-      self._rPermissions.undefined = componentHasDefault ? self._rPermissions[componentHasDefault] : self._rPermissions.bs4
-      self.init = true
+//      self._rPermissions.undefined = componentHasDefault ? self._rPermissions[componentHasDefault] : self._rPermissions.bs4
+
+      // adds a single resize listener for all elements
+      window.addEventListener('resize', () => {
+        // calls the checkDisplay function for all elements that are active in the DOM and use this directive
+        self.resizeListeners.forEach((rl: ResizeListener) => rl.checkDisplay())
+//        for (let i in self.resizeListeners) if (!isNaN(i)) self.resizeListeners[i]()
+      })
+    self.init = true
     }
   },
   beforeMount (el: VueElement, binding: DirectiveBinding, vNode: VNode) {
 
     let useClass = !!binding.modifiers.class
 
-    var componentHasDefault = !!self._rPermissions.default      // @deprecated feature! Insert with create function
     var validInputs = ['hidden-all']
-    let validPositiv = []
-    let choosenBPointsName = componentHasDefault ? self._rPermissions.defaultName : (binding.arg || 'bs4')
-    for (let key in self._rPermissions[binding.arg]) {
+    let validPositiv: string[] = []
+//    let choosenBPointsName: choosenPermissions = componentHasDefault ? self._rPermissions.defaultName : (binding.arg || 'bs4')
+    for (let key in self.choosenBpSet /* _rPermissions[binding.arg] */) {
       validInputs.push(key)
       validPositiv.push(key)
       validInputs.push('hidden-' + key)
@@ -128,14 +152,7 @@ var vueResponsive : Directive = {
     // if this is the first element with this directive that gets bound add the resize listener
     //if (!self.resizeListeners) {
       //self.resizeListeners = {}
-
-      // adds a single resize listener for all elements
-      window.addEventListener('resize', () => {
-        // calls the checkDisplay function for all elements that are active in the DOM and use this directive
-        self.resizeListeners.forEach((rl: ResizeListener) => rl.checkDisplay())
-//        for (let i in self.resizeListeners) if (!isNaN(i)) self.resizeListeners[i]()
-      })
-    
+  
 
     // if the element has a user defined css-value, save it!
     if (el.style.display) el.dataset.initialDisplay = el.style.display ? el.style.display : getComputedStyle(el, null).display
@@ -145,8 +162,15 @@ var vueResponsive : Directive = {
     // need a case for the short syntax
     // are the modifiers decisive?
     let modifiers = window.Object.keys(binding.modifiers)
+    let includesPlusMinus = modifiers.some((k: string) => {
+      let plusMinusRegex = /\+|-/g
+      let cmpEl = k.replace(plusMinusRegex, '')
+      let includesElement: boolean = validPositiv.includes(cmpEl)
+      return includesElement
+    })
+
     if (useClass){}
-    else if (modifiers.some(k => ~validPositiv.indexOf(k.replace(/\+|-/g, '')))) {
+    else if (includesPlusMinus) {
       modifiers.forEach(m => {
         // if (/^(\+|-)|(\+|-)$/g.test(modifiers))
       })
@@ -173,11 +197,11 @@ var vueResponsive : Directive = {
       return // no parameter given, no work :/
     }
     // init the permission object with an id
-    let rId = String(self.idIncrement++)
+    let rId = self.idIncrement++
 
     // save the settings for this element in it's dataset
-    el.dataset.responsives = rId
-    var rPermissions = { lastBp: '', bpSet: choosenBPointsName, useClass }
+    el.dataset.responsives = String(rId)
+    var rPermissions: choosenPermissions = { lastBp: '', bpSet: self.choosenBpSet!.name, useClass }
 
     let hiddenAllIndex = preParams.indexOf('hidden-all')
     if (~hiddenAllIndex) {
@@ -200,7 +224,7 @@ var vueResponsive : Directive = {
       }
     }
 
-    self.allProperties[rId] = rPermissions
+    self.allProperties.set(rId, rPermissions)
   },
 
   /**
@@ -213,27 +237,27 @@ var vueResponsive : Directive = {
    mounted (el: VueElement, binding: DirectiveBinding, vNode: VNode) {
     if (el.dataset.responsives == null) return
     // todo: throw error if isNaN
-    let resizeListenerId = el.dataset.responsives
-
+    let resizeListenerId: number = Number.parseInt( el.dataset.responsives )
+    
+    var myPermissions = self.allProperties.get(resizeListenerId) // JSON.parse(el.dataset.responsives)
     /**
      * This function checks the current breakpoint constraints for this element
      */
     function checkDisplay () {
-      var myPermissions = self.allProperties[resizeListenerId] // JSON.parse(el.dataset.responsives)
       var curWidth = window.innerWidth
       var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : ''
-      var parameters = self._rPermissions[binding.arg]
+      var parameters: breakpointSet = self._rPermissions[binding.arg]
       for (let i in parameters) {
         if (curWidth >= parameters[i].min && curWidth <= parameters[i].max) {
-          if (myPermissions.lastBp !== i) {
-            if (self.allProperties[resizeListenerId].useClass) {
-              el.classList.add(myPermissions.bpSet + '-' + i)
-              el.classList.remove(myPermissions.bpSet + '-' + myPermissions.lastBp)
+          if (myPermissions!.lastBp !== i) {
+            if (self.allProperties.get(resizeListenerId)!.useClass) {
+              el.classList.add(myPermissions!.bpSet + '-' + i)
+              el.classList.remove(myPermissions!.bpSet + '-' + myPermissions!.lastBp)
             } else {
               el.style.display = myPermissions[i] ? initial : 'none !important'
             }
 
-            self.allProperties[resizeListenerId].lastBp = i
+            self.allProperties.get(resizeListenerId)!.lastBp = i
           }
           break
         }
@@ -278,6 +302,19 @@ export {vueResponsive}
 export default vueResponsive
 
 export function fromSettings (settings: vueResponsiveOptions) : Directive{
-  self._rPermissions.default = settings.breakpoints
+//  self._rPermissions.default = settings.breakpoints
+
+  if(settings.breakpoints) {
+    if (Array.isArray(settings.breakpoints)) {
+      for(let el of settings.breakpoints) {
+        self.breakpoints.set(el.name, el)
+      }
+    } else {
+      self.choosenBpSet = settings.breakpoints
+      self.choosenBpSet.name = self.choosenBpSet.name ?? 'custom' 
+      self.breakpoints.set(self.choosenBpSet?.name, self.choosenBpSet)
+    }
+  }
+
   return vueResponsive
 }
