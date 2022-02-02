@@ -9,6 +9,7 @@ module.exports = {
     open: '/Vite.html'
   },
   build: {
+    minify: false,
     assetsDir: 'assets/',
     outDir: 'dist/',
     rollupOptions: {

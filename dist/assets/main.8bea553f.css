@@ -1,0 +1,313 @@
+
+table td[data-v-46488d3e], table th[data-v-46488d3e] {
+    border: 1px solid black;
+    padding: 3px;
+}
+td[data-v-46488d3e]:not(:empty):not(:first-of-type){background-color:lime;color:transparent;}
+.demoOne[data-v-46488d3e]{
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+p[data-v-5c23a6f4] {
+  padding: 5px;
+  background-color: rgba(76, 255, 0,.4);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+code[data-v-5c23a6f4] {
+  text-align: left;
+}
+.demoTwo[data-v-5c23a6f4] {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.demoThree[data-v-7313f052] {
+  max-width: 850px;
+  margin: 0 auto;
+}
+h4.title[data-v-7313f052] {
+  margin-left: 6em;
+}
+
+.demoFour[data-v-f98d1a6c]{
+  margin: auto;
+  margin-left: 100px;
+}
+.demo-block[data-v-f98d1a6c]{
+  width: 40%;
+  border: 1px solid blue;
+  padding: 1rem;
+  position: relative;
+  display: inline-block;
+  margin: 1rem;
+}
+
+.demoFive[data-v-42ef45ee]{
+  margin: auto;
+  margin-left: 100px;
+}
+.demo-block[data-v-42ef45ee]{
+  width: 40%;
+  border: 1px solid blue;
+  padding: 1rem;
+  position: relative;
+  display: inline-block;
+  margin: 1rem;
+}
+
+.ul[data-v-7d57b4ce]{
+  display: flex;
+  flex-wrap: wrap;
+}
+.ul > div[data-v-7d57b4ce] {
+  margin: 3px 0;
+}
+.ul > div > span[data-v-7d57b4ce] {
+  width: 75%;
+  background-color: lightblue;
+  padding: 0 15%;
+}
+.bs4-lg[data-v-7d57b4ce], .bs4-xl[data-v-7d57b4ce] {
+  color: darkblue;
+  width: 33%;
+}
+.bs4-xl[data-v-7d57b4ce] {
+  width: 25%
+}
+.bs4-md[data-v-7d57b4ce] {
+  color: green;
+  width: 50%;
+}
+.bs4-sm[data-v-7d57b4ce], .bs4-xs[data-v-7d57b4ce] {
+  color: red;
+  font-weight: bold;
+  width: 100%;
+}
+p[data-v-7d57b4ce] {
+  padding: 5px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+code[data-v-7d57b4ce] {
+  text-align: left;
+}
+.demoSix[data-v-7d57b4ce] {
+  max-width: 850px;
+  margin: 0 auto;
+  margin-left: 6em;
+}
+
+.header[data-v-308776dc]{
+  position: sticky;
+  top: 0;
+  border: 1px solid black;
+  padding: .5rem;
+  margin-left: 100px;
+  background-color: white;
+}
+.header > span[data-v-308776dc] {
+  margin: 3px;
+}
+.marked[data-v-308776dc]{
+  background-color: darkorange;
+  border-radius: 10%;
+  padding: 3px;
+}
+input[type="radio"][data-v-308776dc] {
+    display: none;
+}
+
+.topInfo[data-v-4013c930]{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 75px;
+}
+.source-toggle[data-v-4013c930] {
+  margin-top: .25rem;
+}
+#topInfo[data-v-4013c930] {
+  padding: 4px;
+  border: 3px dashed orange;
+  background-color: rgba(76, 255, 0,.4);
+  color: darkturquoise;
+}
+label[data-v-4013c930] {
+  font-size: small;
+}
+pre[data-v-4013c930] {
+  background-color: #f5f5f5e8;
+  border: 1px solid black;
+  padding: .25rem;
+  font-size: smaller;
+  width: fit-content;
+  text-align: left;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  padding: 2px;
+  width: 100%;
+  text-align: center;
+  background-color: antiquewhite;
+}
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+body {
+  margin-bottom: 1em;
+  background-color: ghostwhite;
+  margin-top: 0;
+  text-align: center;
+  font-family:'Segoe UI','Franklin Gothic Medium', Arial
+}
+.hljs{display:block;overflow-x:auto;padding:0.5em;background:#F0F0F0}.hljs,.hljs-subst{color:#444}.hljs-comment{color:#888888}.hljs-keyword,.hljs-attribute,.hljs-selector-tag,.hljs-meta-keyword,.hljs-doctag,.hljs-name{font-weight:bold}.hljs-type,.hljs-string,.hljs-number,.hljs-selector-id,.hljs-selector-class,.hljs-quote,.hljs-template-tag,.hljs-deletion{color:#880000}.hljs-title,.hljs-section{color:#880000;font-weight:bold}.hljs-regexp,.hljs-symbol,.hljs-variable,.hljs-template-variable,.hljs-link,.hljs-selector-attr,.hljs-selector-pseudo{color:#BC6060}.hljs-literal{color:#78A960}.hljs-built_in,.hljs-bullet,.hljs-code,.hljs-addition{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta-string{color:#4d99bf}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	/* This background color was intended by the author of this theme. */
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}

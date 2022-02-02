@@ -1,4 +1,115 @@
-import{V}from"./vendor.5582453e.js";const L=function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const n of document.querySelectorAll('link[rel="modulepreload"]'))o(n);new MutationObserver(n=>{for(const i of n)if(i.type==="childList")for(const v of i.addedNodes)v.tagName==="LINK"&&v.rel==="modulepreload"&&o(v)}).observe(document,{childList:!0,subtree:!0});function s(n){const i={};return n.integrity&&(i.integrity=n.integrity),n.referrerpolicy&&(i.referrerPolicy=n.referrerpolicy),n.crossorigin==="use-credentials"?i.credentials="include":n.crossorigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function o(n){if(n.ep)return;n.ep=!0;const i=s(n);fetch(n.href,i)}};L();var E=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"demoOne"},[s("h1",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","xl"],expression:"['hidden-all','xl']"}]},[e._v("A Vue.js responsivity plugin")]),s("h2",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","lg"],expression:"['hidden-all','lg']"}]},[e._v("A Vue.js responsivity plugin")]),s("h3",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","md"],expression:"['hidden-all','md']"}]},[e._v("A Vue.js responsivity plugin")]),s("h4",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","sm"],expression:"['hidden-all','sm']"}]},[e._v("A Vue.js responsivity plugin")]),s("h5",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","xs"],expression:"['hidden-all','xs']"}]},[e._v("A Vue.js responsivity plugin")]),s("h1",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","xl"],expression:"['hidden-all','xl']"}]},[e._v("extra large")]),s("h2",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","lg"],expression:"['hidden-all','lg']"}]},[e._v("large")]),s("h3",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","md"],expression:"['hidden-all','md']"}]},[e._v("medium")]),s("h4",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","sm"],expression:"['hidden-all','sm']"}]},[e._v("small")]),s("h5",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","xs"],expression:"['hidden-all','xs']"}]},[e._v("extra small")]),e._m(0),s("h4",[e._v(" The sourcecode of the two lines above: ")]),s("pre",{staticClass:"language-html"},[s("code",{domProps:{textContent:e._s(e.code)}})])])},F=[function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("table",{staticStyle:{margin:"15px auto","border-spacing":"0"}},[s("tr",[s("th",[e._v("v-responsive=")]),s("th",[e._v("XS")]),s("th",[e._v("SM")]),s("th",[e._v("MD")]),s("th",[e._v("LG")]),s("th",[e._v("XL")])]),s("tr",[s("td",[e._v("['hidden-all', 'xs', 'xl']")]),s("td",[e._v(".")]),s("td"),s("td"),s("td"),s("td",[e._v(".")])]),s("tr",[s("td",[e._v("['hidden-xs']")]),s("td"),s("td",[e._v(".")]),s("td",[e._v(".")]),s("td",[e._v(".")]),s("td",[e._v(".")])]),s("tr",[s("td",[e._v("['hidden-xs', 'hidden-sm']")]),s("td"),s("td"),s("td",[e._v(".")]),s("td",[e._v(".")]),s("td",[e._v(".")])]),s("tr",[s("td",[e._v("['hidden-all', 'lg', 'xl']")]),s("td"),s("td"),s("td"),s("td",[e._v(".")]),s("td",[e._v(".")])]),s("tr",[s("td",[e._v("['hidden-all', 'xl']")]),s("td"),s("td"),s("td"),s("td"),s("td",[e._v(".")])]),s("tr",[s("td",[e._v("['hidden-all', 'xs', 'md', 'xl']")]),s("td",[e._v(".")]),s("td"),s("td",[e._v(".")]),s("td"),s("td",[e._v(".")])])])}];function m(e,t,s,o,n,i,v,c){var l=typeof e=="function"?e.options:e;t&&(l.render=t,l.staticRenderFns=s,l._compiled=!0),o&&(l.functional=!0),i&&(l._scopeId="data-v-"+i);var r;if(v?(r=function(p){p=p||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext,!p&&typeof __VUE_SSR_CONTEXT__!="undefined"&&(p=__VUE_SSR_CONTEXT__),n&&n.call(this,p),p&&p._registeredComponents&&p._registeredComponents.add(v)},l._ssrRegister=r):n&&(r=c?function(){n.call(this,(l.functional?this.parent:this).$root.$options.shadowRoot)}:n),r)if(l.functional){l._injectStyles=r;var h=l.render;l.render=function(x,u){return r.call(u),h(x,u)}}else{var f=l.beforeCreate;l.beforeCreate=f?[].concat(f,r):[r]}return{exports:e,options:l}}const I={name:"DemoOne",data(){return{code:`<h1 v-responsive="['hidden-all','xl']">A Vue.js responsivity plugin</h1>
+import { V as VuePrism } from "./vendor.5582453e.js";
+const p = function polyfill() {
+  const relList = document.createElement("link").relList;
+  if (relList && relList.supports && relList.supports("modulepreload")) {
+    return;
+  }
+  for (const link of document.querySelectorAll('link[rel="modulepreload"]')) {
+    processPreload(link);
+  }
+  new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type !== "childList") {
+        continue;
+      }
+      for (const node of mutation.addedNodes) {
+        if (node.tagName === "LINK" && node.rel === "modulepreload")
+          processPreload(node);
+      }
+    }
+  }).observe(document, { childList: true, subtree: true });
+  function getFetchOpts(script) {
+    const fetchOpts = {};
+    if (script.integrity)
+      fetchOpts.integrity = script.integrity;
+    if (script.referrerpolicy)
+      fetchOpts.referrerPolicy = script.referrerpolicy;
+    if (script.crossorigin === "use-credentials")
+      fetchOpts.credentials = "include";
+    else if (script.crossorigin === "anonymous")
+      fetchOpts.credentials = "omit";
+    else
+      fetchOpts.credentials = "same-origin";
+    return fetchOpts;
+  }
+  function processPreload(link) {
+    if (link.ep)
+      return;
+    link.ep = true;
+    const fetchOpts = getFetchOpts(link);
+    fetch(link.href, fetchOpts);
+  }
+};
+p();
+var render$8 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "demoOne" }, [_c("h1", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "xl"], expression: "['hidden-all','xl']" }] }, [_vm._v("A Vue.js responsivity plugin")]), _c("h2", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "lg"], expression: "['hidden-all','lg']" }] }, [_vm._v("A Vue.js responsivity plugin")]), _c("h3", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "md"], expression: "['hidden-all','md']" }] }, [_vm._v("A Vue.js responsivity plugin")]), _c("h4", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "sm"], expression: "['hidden-all','sm']" }] }, [_vm._v("A Vue.js responsivity plugin")]), _c("h5", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "xs"], expression: "['hidden-all','xs']" }] }, [_vm._v("A Vue.js responsivity plugin")]), _c("h1", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "xl"], expression: "['hidden-all','xl']" }] }, [_vm._v("extra large")]), _c("h2", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "lg"], expression: "['hidden-all','lg']" }] }, [_vm._v("large")]), _c("h3", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "md"], expression: "['hidden-all','md']" }] }, [_vm._v("medium")]), _c("h4", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "sm"], expression: "['hidden-all','sm']" }] }, [_vm._v("small")]), _c("h5", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "xs"], expression: "['hidden-all','xs']" }] }, [_vm._v("extra small")]), _vm._m(0), _c("h4", [_vm._v(" The sourcecode of the two lines above: ")]), _c("pre", { staticClass: "language-html" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.code) } })])]);
+};
+var staticRenderFns$8 = [function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("table", { staticStyle: { "margin": "15px auto", "border-spacing": "0" } }, [_c("tr", [_c("th", [_vm._v("v-responsive=")]), _c("th", [_vm._v("XS")]), _c("th", [_vm._v("SM")]), _c("th", [_vm._v("MD")]), _c("th", [_vm._v("LG")]), _c("th", [_vm._v("XL")])]), _c("tr", [_c("td", [_vm._v("['hidden-all', 'xs', 'xl']")]), _c("td", [_vm._v(".")]), _c("td"), _c("td"), _c("td"), _c("td", [_vm._v(".")])]), _c("tr", [_c("td", [_vm._v("['hidden-xs']")]), _c("td"), _c("td", [_vm._v(".")]), _c("td", [_vm._v(".")]), _c("td", [_vm._v(".")]), _c("td", [_vm._v(".")])]), _c("tr", [_c("td", [_vm._v("['hidden-xs', 'hidden-sm']")]), _c("td"), _c("td"), _c("td", [_vm._v(".")]), _c("td", [_vm._v(".")]), _c("td", [_vm._v(".")])]), _c("tr", [_c("td", [_vm._v("['hidden-all', 'lg', 'xl']")]), _c("td"), _c("td"), _c("td"), _c("td", [_vm._v(".")]), _c("td", [_vm._v(".")])]), _c("tr", [_c("td", [_vm._v("['hidden-all', 'xl']")]), _c("td"), _c("td"), _c("td"), _c("td"), _c("td", [_vm._v(".")])]), _c("tr", [_c("td", [_vm._v("['hidden-all', 'xs', 'md', 'xl']")]), _c("td", [_vm._v(".")]), _c("td"), _c("td", [_vm._v(".")]), _c("td"), _c("td", [_vm._v(".")])])]);
+}];
+var DemoOne_vue_vue_type_style_index_0_scoped_true_lang = "";
+function normalizeComponent(scriptExports, render2, staticRenderFns2, functionalTemplate, injectStyles, scopeId, moduleIdentifier, shadowMode) {
+  var options = typeof scriptExports === "function" ? scriptExports.options : scriptExports;
+  if (render2) {
+    options.render = render2;
+    options.staticRenderFns = staticRenderFns2;
+    options._compiled = true;
+  }
+  if (functionalTemplate) {
+    options.functional = true;
+  }
+  if (scopeId) {
+    options._scopeId = "data-v-" + scopeId;
+  }
+  var hook;
+  if (moduleIdentifier) {
+    hook = function(context) {
+      context = context || this.$vnode && this.$vnode.ssrContext || this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext;
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== "undefined") {
+        context = __VUE_SSR_CONTEXT__;
+      }
+      if (injectStyles) {
+        injectStyles.call(this, context);
+      }
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier);
+      }
+    };
+    options._ssrRegister = hook;
+  } else if (injectStyles) {
+    hook = shadowMode ? function() {
+      injectStyles.call(this, (options.functional ? this.parent : this).$root.$options.shadowRoot);
+    } : injectStyles;
+  }
+  if (hook) {
+    if (options.functional) {
+      options._injectStyles = hook;
+      var originalRender = options.render;
+      options.render = function renderWithStyleInjection(h, context) {
+        hook.call(context);
+        return originalRender(h, context);
+      };
+    } else {
+      var existing = options.beforeCreate;
+      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+    }
+  }
+  return {
+    exports: scriptExports,
+    options
+  };
+}
+const __vue2_script$8 = {
+  name: "DemoOne",
+  data() {
+    return {
+      code: `<h1 v-responsive="['hidden-all','xl']">A Vue.js responsivity plugin</h1>
 <h2 v-responsive="['hidden-all','lg']">A Vue.js responsivity plugin</h2>
 <h3 v-responsive="['hidden-all','md']">A Vue.js responsivity plugin</h3>
 <h4 v-responsive="['hidden-all','sm']">A Vue.js responsivity plugin</h4>
@@ -8,35 +119,184 @@ import{V}from"./vendor.5582453e.js";const L=function(){const t=document.createEl
 <h2 v-responsive="['hidden-all','lg']">large</h2>
 <h3 v-responsive="['hidden-all','md']">medium</h3>
 <h4 v-responsive="['hidden-all','sm']">small</h4>
-<h5 v-responsive="['hidden-all','xs']">extra small</h5>`}}},b={};var R=m(I,E,F,!1,M,"46488d3e",null,null);function M(e){for(let t in b)this[t]=b[t]}var B=function(){return R.exports}(),z=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"demoTwo"},[s("div",[s("p",{directives:[{name:"responsive",rawName:"v-responsive",value:"hidden-xs",expression:"'hidden-xs'"}]},[e._v("I am hidden on extra small device screens")]),s("p",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-sm","hidden-xs"],expression:"['hidden-sm', 'hidden-xs']"}]},[e._v("I am hidden on small device screens")]),s("p",{directives:[{name:"responsive",rawName:"v-responsive",value:e.respObj,expression:"respObj"}]},[e._v("This elements visibility is controlled by an object")])]),s("pre",{staticClass:"language-html"},[s("code",{domProps:{textContent:e._s(e.codeHtml)}})]),s("pre",{staticClass:"language-js"},[s("code",{domProps:{textContent:e._s(e.codeJs)}})])])},H=[];const J={name:"DemoTwo",data(){return{respObj:{"hidden-md":!0,"hidden-lg":!0,"hidden-xl":!0},codeHtml:`<p v-responsive="'hidden-xs'">I am hidden on extra small device screens</p>
+<h5 v-responsive="['hidden-all','xs']">extra small</h5>`
+    };
+  }
+};
+const __cssModules$8 = {};
+var __component__$8 = /* @__PURE__ */ normalizeComponent(__vue2_script$8, render$8, staticRenderFns$8, false, __vue2_injectStyles$8, "46488d3e", null, null);
+function __vue2_injectStyles$8(context) {
+  for (let o in __cssModules$8) {
+    this[o] = __cssModules$8[o];
+  }
+}
+var DemoOne = /* @__PURE__ */ function() {
+  return __component__$8.exports;
+}();
+var render$7 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "demoTwo" }, [_c("div", [_c("p", { directives: [{ name: "responsive", rawName: "v-responsive", value: "hidden-xs", expression: "'hidden-xs'" }] }, [_vm._v("I am hidden on extra small device screens")]), _c("p", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-sm", "hidden-xs"], expression: "['hidden-sm', 'hidden-xs']" }] }, [_vm._v("I am hidden on small device screens")]), _c("p", { directives: [{ name: "responsive", rawName: "v-responsive", value: _vm.respObj, expression: "respObj" }] }, [_vm._v("This elements visibility is controlled by an object")])]), _c("pre", { staticClass: "language-html" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.codeHtml) } })]), _c("pre", { staticClass: "language-js" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.codeJs) } })])]);
+};
+var staticRenderFns$7 = [];
+var DemoTwo_vue_vue_type_style_index_0_scoped_true_lang = "";
+const __vue2_script$7 = {
+  name: "DemoTwo",
+  data() {
+    return {
+      respObj: { "hidden-md": true, "hidden-lg": true, "hidden-xl": true },
+      codeHtml: `<p v-responsive="'hidden-xs'">I am hidden on extra small device screens</p>
 <p v-responsive="['hidden-sm', 'hidden-xs']">I am hidden on small device screens</p>
-<span v-responsive="respObj">This elements visibility is controlled by an object</span>`,codeJs:`data () { return {
+<span v-responsive="respObj">This elements visibility is controlled by an object</span>`,
+      codeJs: `data () { return {
   respObj: { "hidden-md": true, "hidden-lg": true, "hidden-xl": true },
-`}}},C={};var X=m(J,z,H,!1,W,"5c23a6f4",null,null);function W(e){for(let t in C)this[t]=C[t]}var q=function(){return X.exports}(),G=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"demoThree"},[s("h4",{staticClass:"title"},[e._v("This example shows how easy you can use the Breakpoints of Bootstrap 3, which are different of the default Bootstrap 4 breakpoints")]),s("p",{directives:[{name:"responsive",rawName:"v-responsive:bs3",value:["hidden-all","xs"],expression:"['hidden-all','xs']",arg:"bs3"}]},[e._v("Extra small"),s("br"),s("img",{attrs:{src:"http://lorempixel.com/360/240/animals"}})]),s("p",{directives:[{name:"responsive",rawName:"v-responsive:bs3",value:["hidden-all","sm"],expression:"['hidden-all','sm']",arg:"bs3"}]},[e._v("Small "),s("br"),s("img",{attrs:{src:"http://lorempixel.com/540/360/animals"}})]),s("p",{directives:[{name:"responsive",rawName:"v-responsive:bs3",value:["hidden-all","md"],expression:"['hidden-all','md']",arg:"bs3"}]},[e._v("Middle"),s("br"),s("img",{attrs:{src:"http://lorempixel.com/720/360/animals"}})]),s("p",{directives:[{name:"responsive",rawName:"v-responsive:bs3",value:["hidden-all","lg"],expression:"['hidden-all','lg']",arg:"bs3"}]},[e._v("Large "),s("br"),s("img",{attrs:{src:"http://lorempixel.com/780/360/animals"}})]),s("h4",[e._v(" The sourcecode of the lines above: ")]),s("pre",{staticClass:"language-html"},[s("code",{domProps:{textContent:e._s(e.code)}})])])},U=[];const K={name:"DemoThree",data(){return{code:`<p v-responsive:bs3="['hidden-all','xs']"> Extra small <img src=".../360/240/animals" /></p>
+`
+    };
+  }
+};
+const __cssModules$7 = {};
+var __component__$7 = /* @__PURE__ */ normalizeComponent(__vue2_script$7, render$7, staticRenderFns$7, false, __vue2_injectStyles$7, "5c23a6f4", null, null);
+function __vue2_injectStyles$7(context) {
+  for (let o in __cssModules$7) {
+    this[o] = __cssModules$7[o];
+  }
+}
+var DemoTwo = /* @__PURE__ */ function() {
+  return __component__$7.exports;
+}();
+var render$6 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "demoThree" }, [_c("h4", { staticClass: "title" }, [_vm._v("This example shows how easy you can use the Breakpoints of Bootstrap 3, which are different of the default Bootstrap 4 breakpoints")]), _c("p", { directives: [{ name: "responsive", rawName: "v-responsive:bs3", value: ["hidden-all", "xs"], expression: "['hidden-all','xs']", arg: "bs3" }] }, [_vm._v("Extra small"), _c("br"), _c("img", { attrs: { "src": "http://lorempixel.com/360/240/animals" } })]), _c("p", { directives: [{ name: "responsive", rawName: "v-responsive:bs3", value: ["hidden-all", "sm"], expression: "['hidden-all','sm']", arg: "bs3" }] }, [_vm._v("Small "), _c("br"), _c("img", { attrs: { "src": "http://lorempixel.com/540/360/animals" } })]), _c("p", { directives: [{ name: "responsive", rawName: "v-responsive:bs3", value: ["hidden-all", "md"], expression: "['hidden-all','md']", arg: "bs3" }] }, [_vm._v("Middle"), _c("br"), _c("img", { attrs: { "src": "http://lorempixel.com/720/360/animals" } })]), _c("p", { directives: [{ name: "responsive", rawName: "v-responsive:bs3", value: ["hidden-all", "lg"], expression: "['hidden-all','lg']", arg: "bs3" }] }, [_vm._v("Large "), _c("br"), _c("img", { attrs: { "src": "http://lorempixel.com/780/360/animals" } })]), _c("h4", [_vm._v(" The sourcecode of the lines above: ")]), _c("pre", { staticClass: "language-html" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.code) } })])]);
+};
+var staticRenderFns$6 = [];
+var DemoThree_vue_vue_type_style_index_0_scoped_true_lang = "";
+const __vue2_script$6 = {
+  name: "DemoThree",
+  data() {
+    return {
+      code: `<p v-responsive:bs3="['hidden-all','xs']"> Extra small <img src=".../360/240/animals" /></p>
 <p v-responsive:bs3="['hidden-all','sm']"> Small <img src=".../540/360/animals" /></p>
 <p v-responsive:bs3="['hidden-all','md']"> Middle <img src=".../720/360/animals" /></p>
 <p v-responsive:bs3="['hidden-all','lg']"> Large <img src=".../780/360/animals" /></p>
-`}}},S={};var Q=m(K,G,U,!1,Y,"7313f052",null,null);function Y(e){for(let t in S)this[t]=S[t]}var Z=function(){return Q.exports}(),ee=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"demoFour"},[e._m(0),s("pre",{directives:[{name:"responsive",rawName:"v-responsive.lg.xl",modifiers:{lg:!0,xl:!0}}],staticClass:"language-html"},[s("code",{domProps:{textContent:e._s(e.panels[0])}})]),s("pre",{directives:[{name:"responsive",rawName:"v-responsive.md",modifiers:{md:!0}}],staticClass:"language-html"},[s("code",{domProps:{textContent:e._s(e.panels[1])}})]),s("pre",{directives:[{name:"responsive",rawName:"v-responsive.sm.xs",modifiers:{sm:!0,xs:!0}}],staticClass:"language-html"},[s("code",{domProps:{textContent:e._s(e.panels[2])}})]),s("pre",{directives:[{name:"responsive",rawName:"v-responsive.lg.md.sm",modifiers:{lg:!0,md:!0,sm:!0}}],staticClass:"language-html"},[s("code",{domProps:{textContent:e._s(e.panels[3])}})])])},se=[function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("p",[e._v(" Just use "),s("strong",[e._v("v-responsive")]),e._v(" + "),s("strong",[e._v("[xs, sm, md, lg, xl]")]),e._v(" to make elements visible on specific breakpoints and hide them on all others. ")])}];const te={name:"DemoFour",data(){return{panels:[`<span v-responsive.lg.xl>
+`
+    };
+  }
+};
+const __cssModules$6 = {};
+var __component__$6 = /* @__PURE__ */ normalizeComponent(__vue2_script$6, render$6, staticRenderFns$6, false, __vue2_injectStyles$6, "7313f052", null, null);
+function __vue2_injectStyles$6(context) {
+  for (let o in __cssModules$6) {
+    this[o] = __cssModules$6[o];
+  }
+}
+var DemoThree = /* @__PURE__ */ function() {
+  return __component__$6.exports;
+}();
+var render$5 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "demoFour" }, [_vm._m(0), _c("pre", { directives: [{ name: "responsive", rawName: "v-responsive.lg.xl", modifiers: { "lg": true, "xl": true } }], staticClass: "language-html" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.panels[0]) } })]), _c("pre", { directives: [{ name: "responsive", rawName: "v-responsive.md", modifiers: { "md": true } }], staticClass: "language-html" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.panels[1]) } })]), _c("pre", { directives: [{ name: "responsive", rawName: "v-responsive.sm.xs", modifiers: { "sm": true, "xs": true } }], staticClass: "language-html" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.panels[2]) } })]), _c("pre", { directives: [{ name: "responsive", rawName: "v-responsive.lg.md.sm", modifiers: { "lg": true, "md": true, "sm": true } }], staticClass: "language-html" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.panels[3]) } })])]);
+};
+var staticRenderFns$5 = [function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("p", [_vm._v(" Just use "), _c("strong", [_vm._v("v-responsive")]), _vm._v(" + "), _c("strong", [_vm._v("[xs, sm, md, lg, xl]")]), _vm._v(" to make elements visible on specific breakpoints and hide them on all others. ")]);
+}];
+var DemoFour_vue_vue_type_style_index_0_scoped_true_lang = "";
+const __vue2_script$5 = {
+  name: "DemoFour",
+  data() {
+    return {
+      panels: [
+        `<span v-responsive.lg.xl>
   1. large and extra-large
-</span>`,`<span v-responsive.md>
+</span>`,
+        `<span v-responsive.md>
   2. medium
-</span>`,`<span v-responsive.sm.xs>
+</span>`,
+        `<span v-responsive.sm.xs>
   3. small and extra-small
-</span>`,`<span v-responsive.lg.md.sm>
+</span>`,
+        `<span v-responsive.lg.md.sm>
   4. large + medium + small
-</span>`]}}},N={};var ne=m(te,ee,se,!1,re,"f98d1a6c",null,null);function re(e){for(let t in N)this[t]=N[t]}var ie=function(){return ne.exports}(),ae=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"demoFive"},[s("pre",{directives:[{name:"responsive",rawName:"v-responsive",value:-543,expression:"-543"}],staticClass:"language-html demo-block"},[s("code",{domProps:{textContent:e._s(e.text1)}})]),s("pre",{directives:[{name:"responsive",rawName:"v-responsive",value:-1024,expression:"-1024"}],staticClass:"language-html demo-block"},[s("code",{domProps:{textContent:e._s(e.text2)}})]),s("pre",{directives:[{name:"responsive",rawName:"v-responsive",value:-1440,expression:"+1024 && -1440"}],staticClass:"language-html demo-block"},[s("code",{domProps:{textContent:e._s(e.text3)}})]),s("pre",{directives:[{name:"responsive",rawName:"v-responsive",value:1440,expression:"+1440"}],staticClass:"language-html demo-block"},[s("code",{domProps:{textContent:e._s(e.text4)}})]),s("pre",{directives:[{name:"responsive",rawName:"v-responsive",value:992,expression:"992"}],staticClass:"language-html demo-block"},[s("code",{domProps:{textContent:e._s(e.text5)}})])])},oe=[];const le={name:"DemoFive",data(){return{text1:`<span v-responsive="-543">
+</span>`
+      ]
+    };
+  }
+};
+const __cssModules$5 = {};
+var __component__$5 = /* @__PURE__ */ normalizeComponent(__vue2_script$5, render$5, staticRenderFns$5, false, __vue2_injectStyles$5, "f98d1a6c", null, null);
+function __vue2_injectStyles$5(context) {
+  for (let o in __cssModules$5) {
+    this[o] = __cssModules$5[o];
+  }
+}
+var DemoFour = /* @__PURE__ */ function() {
+  return __component__$5.exports;
+}();
+var render$4 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "demoFive" }, [_c("pre", { directives: [{ name: "responsive", rawName: "v-responsive", value: -543, expression: "-543" }], staticClass: "language-html demo-block" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.text1) } })]), _c("pre", { directives: [{ name: "responsive", rawName: "v-responsive", value: -1024, expression: "-1024" }], staticClass: "language-html demo-block" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.text2) } })]), _c("pre", { directives: [{ name: "responsive", rawName: "v-responsive", value: -1440, expression: "+1024 && -1440" }], staticClass: "language-html demo-block" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.text3) } })]), _c("pre", { directives: [{ name: "responsive", rawName: "v-responsive", value: 1440, expression: "+1440" }], staticClass: "language-html demo-block" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.text4) } })]), _c("pre", { directives: [{ name: "responsive", rawName: "v-responsive", value: 992, expression: "992" }], staticClass: "language-html demo-block" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.text5) } })])]);
+};
+var staticRenderFns$4 = [];
+var DemoFive_vue_vue_type_style_index_0_scoped_true_lang = "";
+const __vue2_script$4 = {
+  name: "DemoFive",
+  data() {
+    return {
+      text1: `<span v-responsive="-543">
   Visible@ <543px
-</span>`,text2:`<span v-responsive="-1024">
+</span>`,
+      text2: `<span v-responsive="-1024">
   Visible@ <1024px
-</span>`,text3:`<span v-responsive="+1024 && -1440">
+</span>`,
+      text3: `<span v-responsive="+1024 && -1440">
   Visible@ >=1024 and <1440px
-</span>`,text4:`<span v-responsive="+1440">
+</span>`,
+      text4: `<span v-responsive="+1440">
   Visible@ >=1440px
-</span>`,text5:`<span v-responsive="992">
+</span>`,
+      text5: `<span v-responsive="992">
   Visible@ >=992px
-</span>`}}},P={};var de=m(le,ae,oe,!1,ve,"42ef45ee",null,null);function ve(e){for(let t in P)this[t]=P[t]}var pe=function(){return de.exports}(),ce=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"demoSix"},[s("h4",[e._v("This example shows how you can use classes instead of only hide/show elements")]),s("p",[e._v(' Just add "v-responsive.class" into an element and it will always have class on it, consisting of the prefix of the choosen set of breakpoints and the current breakpoint. Bootstrap 4 and a middle size Scren will add the class "bs4-md". ')]),s("div",{staticClass:"ul"},e._l(e.panels,function(o,n){return s("div",{directives:[{name:"responsive",rawName:"v-responsive.class",modifiers:{class:!0}}],key:n},[s("span",[e._v("A responsive panel")])])}),0),s("br"),s("span",[e._v("The template code")]),s("pre",{staticClass:"language-html"},[s("code",{domProps:{textContent:e._s(e.codeHtml)}})]),s("span",[e._v("The style code")]),s("pre",{staticClass:"language-css"},[s("code",{domProps:{textContent:e._s(e.codeStyle)}})])])},me=[];const ue={name:"DemoSix",data(){return{codeHtml:`<div v-for="(p, idx) in panels" v-responsive.class>
+</span>`
+    };
+  }
+};
+const __cssModules$4 = {};
+var __component__$4 = /* @__PURE__ */ normalizeComponent(__vue2_script$4, render$4, staticRenderFns$4, false, __vue2_injectStyles$4, "42ef45ee", null, null);
+function __vue2_injectStyles$4(context) {
+  for (let o in __cssModules$4) {
+    this[o] = __cssModules$4[o];
+  }
+}
+var DemoFive = /* @__PURE__ */ function() {
+  return __component__$4.exports;
+}();
+var render$3 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "demoSix" }, [_c("h4", [_vm._v("This example shows how you can use classes instead of only hide/show elements")]), _c("p", [_vm._v(' Just add "v-responsive.class" into an element and it will always have class on it, consisting of the prefix of the choosen set of breakpoints and the current breakpoint. Bootstrap 4 and a middle size Scren will add the class "bs4-md". ')]), _c("div", { staticClass: "ul" }, _vm._l(_vm.panels, function(p2, idx) {
+    return _c("div", { directives: [{ name: "responsive", rawName: "v-responsive.class", modifiers: { "class": true } }], key: idx }, [_c("span", [_vm._v("A responsive panel")])]);
+  }), 0), _c("br"), _c("span", [_vm._v("The template code")]), _c("pre", { staticClass: "language-html" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.codeHtml) } })]), _c("span", [_vm._v("The style code")]), _c("pre", { staticClass: "language-css" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.codeStyle) } })])]);
+};
+var staticRenderFns$3 = [];
+var DemoSix_vue_vue_type_style_index_0_scoped_true_lang = "";
+const __vue2_script$3 = {
+  name: "DemoSix",
+  data() {
+    return {
+      codeHtml: `<div v-for="(p, idx) in panels" v-responsive.class>
   <span>A responsive panel</span>
-</div>`,codeStyle:`.bs4-lg, .bs4-xl {
+</div>`,
+      codeStyle: `.bs4-lg, .bs4-xl {
   color: darkblue;
   width: 33%;
 }
@@ -52,9 +312,365 @@ import{V}from"./vendor.5582453e.js";const L=function(){const t=document.createEl
   font-weight: bold;
   width: 100%;
 }
-`,panels:"0000000".split("0")}}},k={};var _e=m(ue,ce,me,!1,he,"7d57b4ce",null,null);function he(e){for(let t in k)this[t]=k[t]}var fe=function(){return _e.exports}(),xe=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"routes"},[s("div",{staticClass:"header"},e._l(e.routes,function(o,n){return o.hide?e._e():s("span",{key:n},[s("label",{class:{marked:e.marked===o.component},attrs:{for:"route"+n}},[e._v(e._s(o.title))]),s("input",{directives:[{name:"model",rawName:"v-model",value:e.marked,expression:"marked"}],attrs:{id:"route"+n,name:"route",type:"radio"},domProps:{value:o.component,checked:e._q(e.marked,o.component)},on:{change:function(i){e.marked=o.component}}})])}),0),s("div",[s(e.marked,{tag:"component"})],1)])},ge=[];const ye={name:"Routes",components:{DemoOne:B,DemoTwo:q,DemoThree:Z,DemoFour:ie,DemoFive:pe,DemoSix:fe},data(){return{marked:"demoFour",routes:[{component:"demoOne",title:"Overview"},{component:"demoTwo",title:"Formats"},{component:"demoThree",title:"Bootstrap 3"},{component:"demoFour",title:"Tokens"},{component:"demoFive",title:"Numbers",hide:!0},{component:"demoSix",title:"Classes",hide:0}]}},mounted(){let e=window.location.hash.substr(1);e&&this.routes.find(t=>t.component===e)?this.marked=e:window.location.hash="#"+this.marked},watch:{marked(e){window.location.hash="#"+e}}},j={};var we=m(ye,xe,ge,!1,$e,"308776dc",null,null);function $e(e){for(let t in j)this[t]=j[t]}var be=function(){return we.exports}(),Ce=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{staticClass:"topInfo"},[s("div",{attrs:{id:"topInfo"}},[s("i",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","xs"],expression:"['hidden-all','xs']"}]},[e._v("Extra small")]),s("i",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","sm"],expression:"['hidden-all','sm']"}]},[e._v("Small ")]),s("i",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","md"],expression:"['hidden-all','md']"}]},[e._v("Middle")]),s("i",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","lg"],expression:"['hidden-all','lg']"}]},[e._v("Large ")]),s("i",{directives:[{name:"responsive",rawName:"v-responsive",value:["hidden-all","xl"],expression:"['hidden-all','xl']"}]},[e._v("Extra large")])]),s("div",{staticClass:"source-toggle"},[s("label",[s("input",{directives:[{name:"model",rawName:"v-model",value:e.showSource,expression:"showSource"}],attrs:{type:"checkbox"},domProps:{checked:Array.isArray(e.showSource)?e._i(e.showSource,null)>-1:e.showSource},on:{change:function(o){var n=e.showSource,i=o.target,v=!!i.checked;if(Array.isArray(n)){var c=null,l=e._i(n,c);i.checked?l<0&&(e.showSource=n.concat([c])):l>-1&&(e.showSource=n.slice(0,l).concat(n.slice(l+1)))}else e.showSource=v}}}),e._v("Show Sourcecode")]),s("pre",{directives:[{name:"show",rawName:"v-show",value:e.showSource,expression:"showSource"}],staticClass:"language-js"},[s("code",{domProps:{textContent:e._s(e.code)}}),e._v(`
-`)])])])},Se=[];const Ne={name:"TopInfo",data(){return{showSource:!1,code:`<i v-responsive="['hidden-all','xs']">Extra small</i>
+`,
+      panels: "0000000".split("0")
+    };
+  }
+};
+const __cssModules$3 = {};
+var __component__$3 = /* @__PURE__ */ normalizeComponent(__vue2_script$3, render$3, staticRenderFns$3, false, __vue2_injectStyles$3, "7d57b4ce", null, null);
+function __vue2_injectStyles$3(context) {
+  for (let o in __cssModules$3) {
+    this[o] = __cssModules$3[o];
+  }
+}
+var DemoSix = /* @__PURE__ */ function() {
+  return __component__$3.exports;
+}();
+var render$2 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "routes" }, [_c("div", { staticClass: "header" }, _vm._l(_vm.routes, function(r, idx) {
+    return !r.hide ? _c("span", { key: idx }, [_c("label", { class: { marked: _vm.marked === r.component }, attrs: { "for": "route" + idx } }, [_vm._v(_vm._s(r.title))]), _c("input", { directives: [{ name: "model", rawName: "v-model", value: _vm.marked, expression: "marked" }], attrs: { "id": "route" + idx, "name": "route", "type": "radio" }, domProps: { "value": r.component, "checked": _vm._q(_vm.marked, r.component) }, on: { "change": function($event) {
+      _vm.marked = r.component;
+    } } })]) : _vm._e();
+  }), 0), _c("div", [_c(_vm.marked, { tag: "component" })], 1)]);
+};
+var staticRenderFns$2 = [];
+var Routes_vue_vue_type_style_index_0_scoped_true_lang = "";
+const __vue2_script$2 = {
+  name: "Routes",
+  components: { DemoOne, DemoTwo, DemoThree, DemoFour, DemoFive, DemoSix },
+  data() {
+    return {
+      marked: "demoFour",
+      routes: [
+        {
+          component: "demoOne",
+          title: "Overview"
+        },
+        {
+          component: "demoTwo",
+          title: "Formats"
+        },
+        {
+          component: "demoThree",
+          title: "Bootstrap 3"
+        },
+        {
+          component: "demoFour",
+          title: "Tokens"
+        },
+        {
+          component: "demoFive",
+          title: "Numbers",
+          hide: true
+        },
+        {
+          component: "demoSix",
+          title: "Classes",
+          hide: 0
+        }
+      ]
+    };
+  },
+  mounted() {
+    let lastVisited = window.location.hash.substr(1);
+    if (lastVisited && this.routes.find((e) => e.component === lastVisited))
+      this.marked = lastVisited;
+    else
+      window.location.hash = "#" + this.marked;
+  },
+  watch: {
+    marked(newVal) {
+      window.location.hash = "#" + newVal;
+    }
+  }
+};
+const __cssModules$2 = {};
+var __component__$2 = /* @__PURE__ */ normalizeComponent(__vue2_script$2, render$2, staticRenderFns$2, false, __vue2_injectStyles$2, "308776dc", null, null);
+function __vue2_injectStyles$2(context) {
+  for (let o in __cssModules$2) {
+    this[o] = __cssModules$2[o];
+  }
+}
+var Routes = /* @__PURE__ */ function() {
+  return __component__$2.exports;
+}();
+var render$1 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "topInfo" }, [_c("div", { attrs: { "id": "topInfo" } }, [_c("i", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "xs"], expression: "['hidden-all','xs']" }] }, [_vm._v("Extra small")]), _c("i", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "sm"], expression: "['hidden-all','sm']" }] }, [_vm._v("Small ")]), _c("i", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "md"], expression: "['hidden-all','md']" }] }, [_vm._v("Middle")]), _c("i", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "lg"], expression: "['hidden-all','lg']" }] }, [_vm._v("Large ")]), _c("i", { directives: [{ name: "responsive", rawName: "v-responsive", value: ["hidden-all", "xl"], expression: "['hidden-all','xl']" }] }, [_vm._v("Extra large")])]), _c("div", { staticClass: "source-toggle" }, [_c("label", [_c("input", { directives: [{ name: "model", rawName: "v-model", value: _vm.showSource, expression: "showSource" }], attrs: { "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.showSource) ? _vm._i(_vm.showSource, null) > -1 : _vm.showSource }, on: { "change": function($event) {
+    var $$a = _vm.showSource, $$el = $event.target, $$c = $$el.checked ? true : false;
+    if (Array.isArray($$a)) {
+      var $$v = null, $$i = _vm._i($$a, $$v);
+      if ($$el.checked) {
+        $$i < 0 && (_vm.showSource = $$a.concat([$$v]));
+      } else {
+        $$i > -1 && (_vm.showSource = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+      }
+    } else {
+      _vm.showSource = $$c;
+    }
+  } } }), _vm._v("Show Sourcecode")]), _c("pre", { directives: [{ name: "show", rawName: "v-show", value: _vm.showSource, expression: "showSource" }], staticClass: "language-js" }, [_c("code", { domProps: { "textContent": _vm._s(_vm.code) } }), _vm._v("\n")])])]);
+};
+var staticRenderFns$1 = [];
+var TopInfo_vue_vue_type_style_index_0_scoped_true_lang = "";
+const __vue2_script$1 = {
+  name: "TopInfo",
+  data() {
+    return {
+      showSource: false,
+      code: `<i v-responsive="['hidden-all','xs']">Extra small</i>
 <i v-responsive="['hidden-all','sm']">Small </i>
 <i v-responsive="['hidden-all','md']">Middle</i>
 <i v-responsive="['hidden-all','lg']">Large </i>
-<i v-responsive="['hidden-all','xl']">Extra large</i>`}}},T={};var Pe=m(Ne,Ce,Se,!1,ke,"4013c930",null,null);function ke(e){for(let t in T)this[t]=T[t]}var je=function(){return Pe.exports}(),Te=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("div",{attrs:{id:"app"}},[s("routes"),s("top-info"),e._m(0)],1)},Ae=[function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("footer",[e._v(" This is a demonstration site for the Open-Source plugin "),s("a",{attrs:{href:"https://github.com/reinerBa/Vue-Responsive"}},[e._v("vue-responsive")]),e._v(" hosted at Github.com ")])}];const Oe={name:"App",components:{Routes:be,TopInfo:je}},A={};var De=m(Oe,Te,Ae,!1,Ve,null,null,null);function Ve(e){for(let t in A)this[t]=A[t]}var Le=function(){return De.exports}();const Ee={xs:{min:-1,max:543},sm:{min:544,max:767},md:{min:768,max:991},lg:{min:992,max:1199},xl:{min:1200,max:1/0}},Fe={xs:{min:-1,max:767},sm:{min:768,max:991},md:{min:992,max:1199},lg:{min:1200,max:1/0}},d={idIncrement:1,resizeListeners:null,init:!1,_rPermissions:{bs4:Ee,bs3:Fe},allProperties:{}};var g={bind:function(e,t,s){var o=!!d._rPermissions.default;let n=!!t.modifiers.class;if(!d.init){for(let a in s.context.$data){if(a.indexOf("responsiveMarks$$")===0){var i=String(a).replace("responsiveMarks$$","").toLowerCase();d._rPermissions[i]={};for(let _ in s.context.$data[a])d._rPermissions[i][_]=s.context.$data[a][_]}a==="responsiveDefault$$"&&(o=s.context.$data[a])}d._rPermissions.undefined=o?d._rPermissions[o]:d._rPermissions.bs4,d.init++}var v=["hidden-all"];let c=[],l=o?d._rPermissions.defaultName:t.arg||"bs4";for(let a in d._rPermissions[t.arg])v.push(a),c.push(a),v.push("hidden-"+a);d.resizeListeners||(d.resizeListeners={},window.addEventListener("resize",function(){for(let a in d.resizeListeners)isNaN(a)||d.resizeListeners[a]()})),e.style.display&&(e.dataset.initialDisplay=e.style.display?e.style.display:getComputedStyle(e,null).display);let r=[],h=window.Object.keys(t.modifiers);if(!n)if(h.some(a=>~c.indexOf(a.replace(/\+|-/g,""))))h.forEach(a=>{}),r.push(...h),r.push("hidden-all"),r.sort();else if(Array.isArray(t.value)||typeof t.expression=="string"&&t.expression.match(/[*]/)){if(Array.isArray(t.value))r=t.value;else{var f=t.expression.replace(/'/g,'"');r=JSON.parse(f)}r.sort()}else if(t.value instanceof Object)for(let a in t.value)t.value[a]&&r.push(a);else if(typeof t.value=="string"||typeof t.expression=="string"){var p=t.value||t.expression.replace(/'"/g,"");r=new Array(p),r.sort()}else return;let x=String(d.idIncrement++);e.dataset.responsives=x;var u={lastBp:"",bpSet:l,useClass:n};let $=r.indexOf("hidden-all");if(~$){r.splice($,1);for(let a in d._rPermissions[t.arg])u[a]=0}else for(let a in d._rPermissions[t.arg])u[a]=1;for(let a=0;a<r.length;a++){let _=r[a];if(!!~v.indexOf(_))if(_.indexOf("hidden")===0){var D=_.split("-")[1];u[D]=0}else u[_]=1}d.allProperties[x]=u},inserted:function(e,t,s){if(e.dataset.responsives==null)return;let o=e.dataset.responsives;function n(){var i=d.allProperties[o],v=window.innerWidth,c=e.dataset.initialDisplay?e.dataset.initialDisplay:"",l=d._rPermissions[t.arg];for(let r in l)if(v>=l[r].min&&v<=l[r].max){i.lastBp!==r&&(d.allProperties[o].useClass?(e.classList.add(i.bpSet+"-"+r),e.classList.remove(i.bpSet+"-"+i.lastBp)):i[r]?e.style.display=c:e.style.setProperty("display","none","important"),d.allProperties[o].lastBp=r);break}}n(),d.resizeListeners[o]=n},unbind:function(e,t,s){let o=e.dataset.responsives;delete d.resizeListeners[o]}};g.install=function(e,t){typeof t=="object"&&t.breakpoints&&(d._rPermissions.default=t.breakpoints),e.directive("responsive",g)};try{var O=!1,w=document.currentScript;w=w||function(){var e=document.getElementsByTagName("script");return e[e.length-1]}(),O=Boolean(w.getAttribute("notGlobal")),!O&&typeof window!="undefined"&&typeof window.Vue=="function"&&window.Vue.use(g)}catch(e){console.error(e)}let y=window.Vue;y.use(V);y.use(g);y.config.productionTip=!1;new y({render:e=>e(Le)}).$mount("#app");
+<i v-responsive="['hidden-all','xl']">Extra large</i>`
+    };
+  }
+};
+const __cssModules$1 = {};
+var __component__$1 = /* @__PURE__ */ normalizeComponent(__vue2_script$1, render$1, staticRenderFns$1, false, __vue2_injectStyles$1, "4013c930", null, null);
+function __vue2_injectStyles$1(context) {
+  for (let o in __cssModules$1) {
+    this[o] = __cssModules$1[o];
+  }
+}
+var TopInfo = /* @__PURE__ */ function() {
+  return __component__$1.exports;
+}();
+var render = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { attrs: { "id": "app" } }, [_c("routes"), _c("top-info"), _vm._m(0)], 1);
+};
+var staticRenderFns = [function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("footer", [_vm._v(" This is a demonstration site for the Open-Source plugin "), _c("a", { attrs: { "href": "https://github.com/reinerBa/Vue-Responsive" } }, [_vm._v("vue-responsive")]), _vm._v(" hosted at Github.com ")]);
+}];
+var App_vue_vue_type_style_index_0_lang = "";
+const __vue2_script = {
+  name: "App",
+  components: {
+    Routes,
+    TopInfo
+  }
+};
+const __cssModules = {};
+var __component__ = /* @__PURE__ */ normalizeComponent(__vue2_script, render, staticRenderFns, false, __vue2_injectStyles, null, null, null);
+function __vue2_injectStyles(context) {
+  for (let o in __cssModules) {
+    this[o] = __cssModules[o];
+  }
+}
+var App = /* @__PURE__ */ function() {
+  return __component__.exports;
+}();
+const bootstrap4Breakpoints = {
+  xs: {
+    min: -1,
+    max: 543
+  },
+  sm: {
+    min: 544,
+    max: 767
+  },
+  md: {
+    min: 768,
+    max: 991
+  },
+  lg: {
+    min: 992,
+    max: 1199
+  },
+  xl: {
+    min: 1200,
+    max: Infinity
+  }
+};
+const bootstrap3Breakpoints = {
+  xs: {
+    min: -1,
+    max: 767
+  },
+  sm: {
+    min: 768,
+    max: 991
+  },
+  md: {
+    min: 992,
+    max: 1199
+  },
+  lg: {
+    min: 1200,
+    max: Infinity
+  }
+};
+const self = {
+  idIncrement: 1,
+  resizeListeners: null,
+  init: false,
+  _rPermissions: {
+    bs4: bootstrap4Breakpoints,
+    bs3: bootstrap3Breakpoints
+  },
+  allProperties: {}
+};
+var vueResponsive = {
+  bind: function(el, binding, vnode) {
+    var componentHasDefault = !!self._rPermissions.default;
+    let useClass = !!binding.modifiers.class;
+    if (!self.init) {
+      for (let i in vnode.context.$data) {
+        if (i.indexOf("responsiveMarks$$") === 0) {
+          var name = String(i).replace("responsiveMarks$$", "").toLowerCase();
+          self._rPermissions[name] = {};
+          for (let ii in vnode.context.$data[i])
+            self._rPermissions[name][ii] = vnode.context.$data[i][ii];
+        }
+        if (i === "responsiveDefault$$")
+          componentHasDefault = vnode.context.$data[i];
+      }
+      self._rPermissions.undefined = componentHasDefault ? self._rPermissions[componentHasDefault] : self._rPermissions.bs4;
+      self.init++;
+    }
+    var validInputs = ["hidden-all"];
+    let validPositiv = [];
+    let choosenBPointsName = componentHasDefault ? self._rPermissions.defaultName : binding.arg || "bs4";
+    for (let key2 in self._rPermissions[binding.arg]) {
+      validInputs.push(key2);
+      validPositiv.push(key2);
+      validInputs.push("hidden-" + key2);
+    }
+    if (!self.resizeListeners) {
+      self.resizeListeners = {};
+      window.addEventListener("resize", function() {
+        for (let i in self.resizeListeners)
+          if (!isNaN(i))
+            self.resizeListeners[i]();
+      });
+    }
+    if (el.style.display)
+      el.dataset.initialDisplay = el.style.display ? el.style.display : getComputedStyle(el, null).display;
+    let preParams = [];
+    let modifiers = window.Object.keys(binding.modifiers);
+    if (useClass)
+      ;
+    else if (modifiers.some((k) => ~validPositiv.indexOf(k.replace(/\+|-/g, "")))) {
+      modifiers.forEach((m) => {
+      });
+      preParams.push(...modifiers);
+      preParams.push("hidden-all");
+      preParams.sort();
+    } else if (Array.isArray(binding.value) || typeof binding.expression === "string" && binding.expression.match(/[*]/)) {
+      if (Array.isArray(binding.value)) {
+        preParams = binding.value;
+      } else {
+        var stringArray = binding.expression.replace(/'/g, '"');
+        preParams = JSON.parse(stringArray);
+      }
+      preParams.sort();
+    } else if (binding.value instanceof Object) {
+      for (let i in binding.value) {
+        if (binding.value[i])
+          preParams.push(i);
+      }
+    } else if (typeof binding.value === "string" || typeof binding.expression === "string") {
+      var val = binding.value || binding.expression.replace(/'"/g, "");
+      preParams = new Array(val);
+      preParams.sort();
+    } else {
+      return;
+    }
+    let rId = String(self.idIncrement++);
+    el.dataset.responsives = rId;
+    var rPermissions = { lastBp: "", bpSet: choosenBPointsName, useClass };
+    let hiddenAllIndex = preParams.indexOf("hidden-all");
+    if (~hiddenAllIndex) {
+      preParams.splice(hiddenAllIndex, 1);
+      for (let i in self._rPermissions[binding.arg])
+        rPermissions[i] = 0;
+    } else {
+      for (let k in self._rPermissions[binding.arg])
+        rPermissions[k] = 1;
+    }
+    for (let i = 0; i < preParams.length; i++) {
+      let item = preParams[i];
+      if (!~validInputs.indexOf(item))
+        continue;
+      if (item.indexOf("hidden") === 0) {
+        var key = item.split("-")[1];
+        rPermissions[key] = 0;
+      } else {
+        rPermissions[item] = 1;
+      }
+    }
+    self.allProperties[rId] = rPermissions;
+  },
+  inserted: function(el, binding, vnode) {
+    if (el.dataset.responsives == null)
+      return;
+    let resizeListenerId = el.dataset.responsives;
+    function checkDisplay() {
+      var myPermissions = self.allProperties[resizeListenerId];
+      var curWidth = window.innerWidth;
+      var initial = el.dataset.initialDisplay ? el.dataset.initialDisplay : "";
+      var parameters = self._rPermissions[binding.arg];
+      for (let i in parameters) {
+        if (curWidth >= parameters[i].min && curWidth <= parameters[i].max) {
+          if (myPermissions.lastBp !== i) {
+            if (self.allProperties[resizeListenerId].useClass) {
+              el.classList.add(myPermissions.bpSet + "-" + i);
+              el.classList.remove(myPermissions.bpSet + "-" + myPermissions.lastBp);
+            } else {
+              if (myPermissions[i])
+                el.style.display = initial;
+              else
+                el.style.setProperty("display", "none", "important");
+            }
+            self.allProperties[resizeListenerId].lastBp = i;
+          }
+          break;
+        }
+      }
+    }
+    checkDisplay();
+    self.resizeListeners[resizeListenerId] = checkDisplay;
+  },
+  unbind: function(el, binding, vnode) {
+    let resizeListenerId = el.dataset.responsives;
+    delete self.resizeListeners[resizeListenerId];
+  }
+};
+vueResponsive.install = function(Vue2, options) {
+  if (typeof options === "object" && options.breakpoints) {
+    self._rPermissions.default = options.breakpoints;
+  }
+  Vue2.directive("responsive", vueResponsive);
+};
+try {
+  var notGlobal = false;
+  var currScriptFn = document.currentScript;
+  currScriptFn = currScriptFn || function() {
+    var scripts = document.getElementsByTagName("script");
+    return scripts[scripts.length - 1];
+  }();
+  notGlobal = Boolean(currScriptFn.getAttribute("notGlobal"));
+  if (!notGlobal && typeof window !== "undefined" && typeof window.Vue === "function")
+    window.Vue.use(vueResponsive);
+} catch (idk) {
+  console.error(idk);
+}
+var prism = "";
+let Vue = window.Vue;
+Vue.use(VuePrism);
+Vue.use(vueResponsive);
+Vue.config.productionTip = false;
+new Vue({
+  render: (h) => h(App)
+}).$mount("#app");
