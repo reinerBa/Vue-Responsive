@@ -4,6 +4,9 @@
   "description": "A plugin for responsive design without media querys for Vue.js 2.x",
   "main": "src/index.js",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build && node -e \"require('fs').rename('dist/Vite.html', 'dist/index.html', () =>{})\" && npm run dist",
+    "serve": "vite preview",
     "live": "live-server --open=Demo.html",
     "dist": "node build/babel.release.js",
     "build:types": "tsc src/index.js -d --declarationDir src/ --declarationMap --emitDeclarationOnly --allowJs"
@@ -47,7 +50,11 @@
     "shelljs": "^0.8.5",
     "typescript": "^4.5.4",
     "uglify-js": "^3.14.5",
-    "vue-prism": "^1.0.5"
+    "vite": "^2.0.5",
+    "vite-plugin-vue2": "^1.4.0",
+    "vue": "^2.6.12",
+    "vue-prism": "^1.0.5",
+    "vue-template-compiler": "^2.6.14"
   },
   "engines": {
     "node": ">= 6.0.0",

@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import DemoOne from './DemoOne'
-import DemoTwo from './DemoTwo'
-import DemoThree from './DemoThree'
-import DemoFour from './DemoFour'
-import DemoFive from './DemoFive'
-import DemoSix from './DemoSix'
+import DemoOne from './DemoOne.vue'
+import DemoTwo from './DemoTwo.vue'
+import DemoThree from './DemoThree.vue'
+import DemoFour from './DemoFour.vue'
+import DemoFive from './DemoFive.vue'
+import DemoSix from './DemoSix.vue'
 
 export default {
   name: 'Routes',

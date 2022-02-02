@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Routes from './components/Routes'
-import TopInfo from './components/TopInfo'
+import Routes from './components/Routes.vue'
+import TopInfo from './components/TopInfo.vue'
 
 export default {
   name: 'App',
