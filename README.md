@@ -9,9 +9,10 @@
 [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 [![npm](https://img.shields.io/npm/v/vue-responsive.svg)](https://www.npmjs.com/package/vue-responsive)
 [![Npm package yearly downloads](https://badgen.net/npm/dy/vue-responsive)](https://npmjs.com/package/vue-responsive)
-[![GitHub stars](https://img.shields.io/github/stars/reinerBa/Vue-Responsive.svg)](https://github.com/reinerBa/Vue-Responsive/stargazers)
 [![license](https://img.shields.io/github/license/reinerBa/Vue-Responsive.svg)](https://github.com/reinerBa/vue-responsive/blob/master/LICENSE)
 [![Github file size](https://img.shields.io/github/size/reinerBa/Vue-Responsive/dist/Vue-Responsive.min.js.svg)](https://raw.githubusercontent.com/reinerBa/Vue-Responsive/master/dist/Vue-Responsive.min.js)
+[![GitHub stars](https://img.shields.io/github/stars/reinerBa/vue-responsive.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/reinerBa/vue-responsive/stargazers/)
+
 
 [![NPM](https://nodei.co/npm/vue-responsive.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-responsive/)
 
