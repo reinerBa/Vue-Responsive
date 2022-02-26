@@ -40,6 +40,9 @@ import responsive from 'vue-responsive'
 Vue.use(responsive)
 ```
 
+or in your Browser as **CDN**: <br/>
+`<script src="https://unpkg.com/vue-responsive@1.3.1/dist/Vue-Responsive.min.js"></script>`
+
 ## 👈 Shortest usecase
 
 Just put the breakpoint identifiers behind the directive with dots:
